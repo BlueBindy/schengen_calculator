@@ -16,6 +16,9 @@ SCOPED_CREDS= CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('schengen_calculator')
 
+#remove pprint before deployment
+#input statements need \n (new line character) to deploy
+#using this Github template
 
 visa = SHEET.worksheet('visa_requirements')
 

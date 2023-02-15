@@ -49,9 +49,11 @@ Sensitive data in the cred.json file was withheld from being pushed to GitHub by
 
 Two dependencies, Google-auth (needed to authenticate access to the Google cloud account for the spreadsheet) and gspread (a library), were installed using 'pip3 install gspread google-auth' in the command line and then imported into directory file: 'run.py'
 
-Scope in run.py was from Code Institute Python Essentials Project Walkthrough. 
 
 Development was within a Github repository, based on the Code Institute template: https://github.com/Code-Institute-Org/python-essentials-template . Repository is: https://github.com/BlueBindy/schengen_calculator and was built using the Gitpod button on the template repository menu. 
+
+Deployment to Heroku
+Dependencies necessary for deployment to Heroku were adding by using 'pip3 freeze > requirements.txt' to terminal 
 
 Acknowledgements
 SCOPE code and code to link the programme to the Google Sheet was taken from Code Institute Python Essentials Project Walthrough module
