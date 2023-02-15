@@ -20,8 +20,4 @@ SHEET = GSPREAD_CLIENT.open('schengen_calculator')
 #input statements need \n (new line character) to deploy
 #using this Github template
 
-visa = SHEET.worksheet('visa_requirements')
-
-days = visa.get_all_values()
-
-print(days)
+print('Welcome to 90 Days in 180. Enter the dates of your recent trips to find out how much of your 90 days of tourist allowance in the past 180days you have still available as of today. Only trips in the last 180 days are relevant and only historic trips (not future) are counted here.')
