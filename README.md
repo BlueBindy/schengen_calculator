@@ -29,3 +29,20 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 -----
 Happy coding!
+
+
+Deployment
+Google API was set up via: 
+https://console.cloud.google.com/ A new project ('schengencalculator') was created. From here, navigate to 'API and Services' and then 'Library' from teh memu. Using the search bar to find the Google API, it was enabled and then credentials created. The following options were selected:
+Which API are you using: Google Drive API
+What data will you be accessing: Application Data
+Are you planning to use this API with Compute Engine, Kubernetes Engine, App Engine, or Cloud Functions?: 'No, I'm not using them'
+
+Service account name is fionaschengen and the service account is:
+fionaschengen@schengencalculator-377909.iam.gserviceaccount.com
+
+From within Credentials on the menu, the service account was selected and then Keys was selected from the available menu. From here 'Add Key' -> 'Create New Key' with 'JSON' selected as key type. The file that was created and downloaded was saved into the directory XXXXXX.
+
+Finally, from within the Library tab on the menu, Google Sheets API was searched for and enabled. 
+
+Development was within a Github repository, based on the Code Institute template: https://github.com/Code-Institute-Org/python-essentials-template
