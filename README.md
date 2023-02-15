@@ -55,5 +55,11 @@ Development was within a Github repository, based on the Code Institute template
 Deployment to Heroku
 Dependencies necessary for deployment to Heroku were adding by using 'pip3 freeze > requirements.txt' to terminal 
 
+From Heroku dashboard, 'Create New App' was selected from the menu. App is called 'schengen-calculator'. In the Settings tab, a config var was set up for creds.json (which is not pushed to GitHub but is required by Heroku for deployment.) In Config Vars, for Key, 'CREDS' was entered. In Value, the contents of creds.json file was copied and pasted.
+
+Python and node.js were added as Buildpacks.
+
+In the Deploy tab, GitHub was chosen and connected. Automatic deployment was selected. 
+
 Acknowledgements
 SCOPE code and code to link the programme to the Google Sheet was taken from Code Institute Python Essentials Project Walthrough module
