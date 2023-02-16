@@ -1,8 +1,10 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+#Import Google Sheet class from Google module
 import gspread
 from google.oauth2.service_account import Credentials
+# Import the class datetime, from within datetime module
+from datetime import datetime
+
 
 #SCOPE code taken from Code Institute Python Essentials Project Walthrough module
 SCOPE = [
@@ -20,4 +22,11 @@ SHEET = GSPREAD_CLIENT.open('schengen_calculator')
 #input statements need \n (new line character) to deploy
 #using this Github template
 
-print('Welcome to 90 Days in 180. Enter the dates of your recent trips to find out how much of your 90 days of tourist allowance in the past 180days you have still available as of today. Only trips in the last 180 days are relevant and only historic trips (not future) are counted here.')
+#print('Welcome to 90 Days in 180. Enter the dates of your recent trips to find out how much of your 90 days of tourist allowance in the past 180days you have still available as of today. Only trips in the last 180 days are relevant and only historic trips (not future) are counted here.')
+
+# Returns the current local date
+def observed_period_start():
+    today = datetime.today().strftime('%d/%m/%Y')
+    print("Today's date is: ", today)
+
+observed_period_start()
