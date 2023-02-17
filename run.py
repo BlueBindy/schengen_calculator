@@ -95,7 +95,8 @@ def calculate_trips():
     trip_list = []
     trips = input("Enter the date your trip started:\n")
     if validate_dates(trips):
-        print("You entered a valid date:", trips)
+        if check_start_date_current(trips):
+            print("You entered a valid date:", trips)
         return
     trip_list.append(trips)
     return trip_list
@@ -113,6 +114,31 @@ def validate_dates(dates):
         return False
 
     return True
+
+def check_start_date_current(trips):
+    """
+    check user entered start dates are after 
+    restricted_period_starts and before today's date.
+    """
+    # Use of operands on dates suggested by Paolo Moretti, StackOverflow
+    total_period = SHEET.worksheet('restricted_period').get_all_values()
+    total_range = total_period[1]
+    total_converted = int(total_range[0])
+    restricted_period_starts = (
+        datetime.today() - timedelta(days=total_converted)
+    )
+    trips_date = datetime.strptime(trips, '%d/%m/%Y')
+    
+    if trips_date < restricted_period_starts:
+        print(f"The start date of your trip ({trips}) is before the restricted period starts.")
+        return False
+    
+    if trips_date > datetime.today():
+        print(f"The start date of your trip ({trips}) is in the future.")
+        return False
+    
+    return True
+
 
 
 def main():
