@@ -101,6 +101,7 @@ def calculate_trips():
     trip_list.append(trips)
     return trip_list
 
+
 def validate_dates(dates):
     """
     validate dates
@@ -112,12 +113,12 @@ def validate_dates(dates):
     except ValueError as e:
         print(f"Invalid dates: {e}, please try again.\n")
         return False
-
     return True
+
 
 def check_start_date_current(trips):
     """
-    check user entered start dates are after 
+    check user entered start dates are after
     restricted_period_starts and before today's date.
     """
     # Use of operands on dates suggested by Paolo Moretti, StackOverflow
@@ -128,17 +129,16 @@ def check_start_date_current(trips):
         datetime.today() - timedelta(days=total_converted)
     )
     trips_date = datetime.strptime(trips, '%d/%m/%Y')
-    
+
     if trips_date < restricted_period_starts:
         print(f"The start date of your trip ({trips}) is before the restricted period starts.")
         return False
-    
+
     if trips_date > datetime.today():
         print(f"The start date of your trip ({trips}) is in the future.")
         return False
-    
-    return True
 
+    return True
 
 
 def main():
