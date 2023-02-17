@@ -53,7 +53,6 @@ def observed_period_start():
         datetime.today() - timedelta(days=total_converted)
     )
 
-    print(restricted_period_starts.strftime('%d/%m/%Y'))
     print(
         f"Welcome to Schengen Calculator. Visa-exempt nationals are allowed "
         f"{visa_converted} days in a rolling period of {total_converted} days "
@@ -68,10 +67,49 @@ def observed_period_start():
     )
 
 
-observed_period_start()
+def calculate_trips():
+    """
+    Get start date of trip from user. Validate for valid date, trip
+    begins after restricted_period_starts and before today's date.
+    Get end date of trip from user. Validate for valid date, trip
+    begins after trip starts and before today's date. Append trip to 
+    variable and ask user for another trip or to calculate.
+    """
+    total_period = SHEET.worksheet('restricted_period').get_all_values()
+    total_range = total_period[1]
+    total_converted = int(total_range[0])
+
+    restricted_period_starts = (
+        datetime.today() - timedelta(days=total_converted)
+    )
+
+    today = datetime.today().strftime('%d/%m/%Y')
+
+    
+    print("Please enter the start date of your trip as dd/mm/yyy")
+    print(
+        f"The first day must be after {restricted_period_starts.strftime('%d/%m/%Y')} "
+        f"and before {today}."
+    )
+    # note data is string, need to convert to datetime object using the datetime.strptime method.
+    trip_list = []
+    trips = input("Enter the date your trip started:\n")
+    trip_list.append(trips)
+    print("Your trip started on:", trips)
+    return trip_list
+
+
+
+def main():
+    observed_period_start()
+    calculate_trips()
+
+main()    
+
+
 
 # get today's date and convert to dd/mm/yyyy
 # Returns the current local date as a string from datetime module import
 # using strftime to format as dd/mm/yyyyy.
 # today = datetime.today().strftime('%d/%m/%Y')
-
+# restricted_period_starts.strftime('%d/%m/%Y'))
