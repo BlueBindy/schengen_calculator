@@ -72,7 +72,7 @@ def calculate_trips():
     Get start date of trip from user. Validate for valid date, trip
     begins after restricted_period_starts and before today's date.
     Get end date of trip from user. Validate for valid date, trip
-    begins after trip starts and before today's date. Append trip to 
+    begins after trip starts and before today's date. Append trip to
     variable and ask user for another trip or to calculate.
     """
     total_period = SHEET.worksheet('restricted_period').get_all_values()
@@ -85,27 +85,42 @@ def calculate_trips():
 
     today = datetime.today().strftime('%d/%m/%Y')
 
-    
     print("Please enter the start date of your trip as dd/mm/yyy")
     print(
         f"The first day must be after {restricted_period_starts.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
-    # note data is string, need to convert to datetime object using the datetime.strptime method.
+    # note data is string, need to convert to datetime object
+    # using the datetime.strptime method.
     trip_list = []
     trips = input("Enter the date your trip started:\n")
+    if validate_dates(trips):
+        print("You entered a valid date:", trips)
+        return
     trip_list.append(trips)
-    print("Your trip started on:", trips)
     return trip_list
 
+def validate_dates(dates):
+    """
+    validate dates
+    """
+    try:
+        date = datetime.strptime(dates, "%d/%m/%Y")
+        print("You entered a valid date:", date)
+    # ValueError code based on Code Institute Walkthrough Project
+    except ValueError as e:
+        print(f"Invalid dates: {e}, please try again.\n")
+        return False
+
+    return True
 
 
 def main():
     observed_period_start()
     calculate_trips()
 
-main()    
 
+main()
 
 
 # get today's date and convert to dd/mm/yyyy
