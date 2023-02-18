@@ -87,7 +87,8 @@ def calculate_trips():
 
     print("Please enter the start date of your trip as dd/mm/yyy")
     print(
-        f"The first day must be after {restricted_period_starts.strftime('%d/%m/%Y')} "
+        f"The first day must be after "
+        f"{restricted_period_starts.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
     # note data is string, need to convert to datetime object
@@ -113,7 +114,7 @@ def calculate_trips():
         else:
             return
     else:
-       return
+        return
 
     trip_list.append((start_date)) #,end_date)
     return trip_list
@@ -149,8 +150,8 @@ def check_start_date_current(start_date):
 
     if trips_date < restricted_period_starts:
         print(
-            f"The start date of your trip ({start_date}) is before your 180 day "
-            f"period starts. Please enter a date after " 
+            f"The start date of your trip ({start_date}) is before your 180 "
+            f"day period starts. Please enter a date after "
             f"{restricted_period_starts.strftime('%d/%m/%Y')}."
         )
         return False
@@ -164,6 +165,7 @@ def check_start_date_current(start_date):
 
     return True
 
+
 def check_end_date_valid(start_date, end_date):
     """
     check user entered ends dates are after
@@ -173,7 +175,7 @@ def check_end_date_valid(start_date, end_date):
     if start_date < end_date:
         print(
             f"The end date of your trip ({end_date}) is before your trip "
-            f"starts. Please enter a date after ({start_date}). " 
+            f"starts. Please enter a date after ({start_date}). "
         )
         return False
 
