@@ -102,13 +102,20 @@ def calculate_trips():
     else:
         return
 
-    print("Please enter the end date of your trip as dd/mm/yyy")
     print(
-        f"The last day must be after {start_date} "
+        f"The last day of your trip must be after {start_date} "
         f"and before {today}."
     )
+    end_date = input("Please enter the end date of your trip: \n")
+    if validate_dates(end_date):
+        if check_end_date_valid(start_date, end_date):
+            print("You entered a valid date:", end_date)
+        else:
+            return
+    else:
+       return
 
-    trip_list.append(start_date)
+    trip_list.append((start_date)) #,end_date)
     return trip_list
 
 
@@ -149,6 +156,28 @@ def check_start_date_current(start_date):
         return False
 
     if trips_date > datetime.today():
+        print(
+            f"The start date of your trip ({start_date}) is in the future."
+            f" The trip period must be historical."
+            )
+        return False
+
+    return True
+
+def check_end_date_valid(start_date, end_date):
+    """
+    check user entered ends dates are after
+    trip start date and before today's date.
+    """
+    end_date_converted = datetime.strptime(end_date, '%d/%m/%Y')
+    if start_date < end_date:
+        print(
+            f"The end date of your trip ({end_date}) is before your trip "
+            f"starts. Please enter a date after ({start_date}). " 
+        )
+        return False
+
+    if end_date_converted > datetime.today():
         print(
             f"The start date of your trip ({start_date}) is in the future."
             f" The trip period must be historical."
