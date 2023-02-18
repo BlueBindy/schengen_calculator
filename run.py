@@ -97,15 +97,18 @@ def calculate_trips():
     if validate_dates(start_date):
         if check_start_date_current(start_date):
             print("You entered a valid date:", start_date)
+        else:
             return
-    trip_list.append(start_date)
-   
+    else:
+        return
+
     print("Please enter the end date of your trip as dd/mm/yyy")
     print(
         f"The last day must be after {start_date} "
         f"and before {today}."
     )
 
+    trip_list.append(start_date)
     return trip_list
 
 
