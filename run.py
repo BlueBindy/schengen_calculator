@@ -93,12 +93,19 @@ def calculate_trips():
     # note data is string, need to convert to datetime object
     # using the datetime.strptime method.
     trip_list = []
-    trips = input("Enter the date your trip started:\n")
-    if validate_dates(trips):
-        if check_start_date_current(trips):
-            print("You entered a valid date:", trips)
-        return
-    trip_list.append(trips)
+    start_date = input("Enter the date your trip started:\n")
+    if validate_dates(start_date):
+        if check_start_date_current(start_date):
+            print("You entered a valid date:", start_date)
+            return
+    trip_list.append(start_date)
+   
+    print("Please enter the end date of your trip as dd/mm/yyy")
+    print(
+        f"The last day must be after {start_date} "
+        f"and before {today}."
+    )
+
     return trip_list
 
 
@@ -108,15 +115,15 @@ def validate_dates(dates):
     """
     try:
         date = datetime.strptime(dates, "%d/%m/%Y")
-        print("You entered a valid date:", date)
     # ValueError code based on Code Institute Walkthrough Project
+    # Find out how to change error message to user friendly language
     except ValueError as e:
         print(f"Invalid dates: {e}, please try again.\n")
         return False
     return True
 
 
-def check_start_date_current(trips):
+def check_start_date_current(start_date):
     """
     check user entered start dates are after
     restricted_period_starts and before today's date.
@@ -128,14 +135,21 @@ def check_start_date_current(trips):
     restricted_period_starts = (
         datetime.today() - timedelta(days=total_converted)
     )
-    trips_date = datetime.strptime(trips, '%d/%m/%Y')
+    trips_date = datetime.strptime(start_date, '%d/%m/%Y')
 
     if trips_date < restricted_period_starts:
-        print(f"The start date of your trip ({trips}) is before the restricted period starts.")
+        print(
+            f"The start date of your trip ({start_date}) is before your 180 day "
+            f"period starts. Please enter a date after " 
+            f"{restricted_period_starts.strftime('%d/%m/%Y')}."
+        )
         return False
 
     if trips_date > datetime.today():
-        print(f"The start date of your trip ({trips}) is in the future.")
+        print(
+            f"The start date of your trip ({start_date}) is in the future."
+            f" The trip period must be historical."
+            )
         return False
 
     return True
