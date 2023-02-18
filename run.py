@@ -194,6 +194,10 @@ def main():
 
 main()
 
+# next step: ask user for another trip or calculate
+# next step2: calculate and give user a response
+# next step3: push remaining allowance to gsheet.
+
 
 # get today's date and convert to dd/mm/yyyy
 # Returns the current local date as a string from datetime module import
