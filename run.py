@@ -131,6 +131,7 @@ def calculate_trips():
     print(trip_list)
     return trip_list
 
+
 def validate_dates(dates):
     """
     validate dates
@@ -203,7 +204,7 @@ def check_end_date_valid(start_date, end_date):
 def calculate_days_left(trip_list):
     """
     Function to calculate the days between user entered trips.
-    Returns string of days. 
+    Returns string of days.
     """
     # print('called calculate days function')
     for start_date_str, end_date_str in trip_list:
