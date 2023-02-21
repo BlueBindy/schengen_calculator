@@ -118,15 +118,15 @@ def calculate_trips():
 
     trip_list.append((start_date, end_date))
 
-    def ask_another_trip():
+    def ask_another_trip(trip_list):
         while True:
             another_trip = input("Do you want to add another trip? Y/N :\n")
             if another_trip == ("n"):
-                calculate_days_left()
+                calculate_days_left(trip_list)
                 break
             else:
-                calculate_trips()
-    ask_another_trip()
+                calculate_trips(trip_list)
+    ask_another_trip(trip_list)
 
     print(trip_list)
     return trip_list
@@ -200,8 +200,18 @@ def check_end_date_valid(start_date, end_date):
     return True
 
 
-def calculate_days_left():
-    print('called calculate days function')
+def calculate_days_left(trip_list):
+    """
+    Function to calculate the days between user entered trips.
+    Returns string of days. 
+    """
+    # print('called calculate days function')
+    for start_date_str, end_date_str in trip_list:
+        start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
+        end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
+        delta = end_date - start_date
+        days_between = delta.days
+    print(f"Trip from {start_date_str} to {end_date_str} was {days_between} days long.")
 
 
 def main():
