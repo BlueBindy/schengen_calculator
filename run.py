@@ -116,7 +116,7 @@ def calculate_trips():
     else:
         return
 
-    trip_list.append((start_date)) #,end_date)
+    trip_list.append((start_date))   # ,end_date)
 
     def ask_another_trip():
         while True:
@@ -126,11 +126,9 @@ def calculate_trips():
                 break
             else:
                 calculate_trips()
-    
     ask_another_trip()
 
     return trip_list
-
 
 
 def validate_dates(dates):
@@ -200,6 +198,7 @@ def check_end_date_valid(start_date, end_date):
         return False
 
     return True
+
 
 def calculate_days_left():
     print('called calculate days function')
