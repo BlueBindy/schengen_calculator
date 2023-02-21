@@ -56,11 +56,11 @@ def observed_period_start():
     print(
         f"Welcome to Schengen Calculator. Visa-exempt nationals are allowed "
         f"{visa_converted} days in a rolling period of {total_converted} days "
-        f"on a visa waiver programme. Below, you can enter the dates of your "
-        f"recent trips. You will find out how much of your {visa_converted} "
-        f"days allowance you have still have available as of today. Only "
-        f"trips in the last {total_converted} days are relevant and only "
-        f"historic (not future) are counted here. \n"
+        f"on a visa waiver programme. Enter the dates of your "
+        f"recent trips below and you will find out how much of your "
+        f" {visa_converted} days allowance you have still have available  "
+        f"as of today. Only trips in the last {total_converted} days are  "
+        f"relevant and only historic (not future) are counted here. \n"
         f"Your {total_converted} rolling period started on "
         f"{restricted_period_starts.strftime('%d/%m/%Y')}, so only enter "
         f"dates of trips from that period onwards, up until today's date."
@@ -116,7 +116,7 @@ def calculate_trips():
     else:
         return
 
-    trip_list.append((start_date))   # ,end_date)
+    trip_list.append((start_date, end_date))
 
     def ask_another_trip():
         while True:
@@ -128,8 +128,8 @@ def calculate_trips():
                 calculate_trips()
     ask_another_trip()
 
+    print(trip_list)
     return trip_list
-
 
 def validate_dates(dates):
     """
