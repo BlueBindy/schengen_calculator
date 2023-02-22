@@ -52,21 +52,24 @@ def observed_period_start():
     restricted_period_starts = (
         datetime.today() - timedelta(days=total_converted)
     )
-
+    # print blank, new lines included for readability
     print(
-        f"Welcome to Schengen Calculator. \n" 
+        f"Welcome to Schengen Calculator. \n"
+        f" \n"
         f"Visa-exempt nationals are allowed {visa_converted} "
         f"days in a rolling period of {total_converted} days \n"
-        f"on a visa waiver programme. \n" 
+        f"on a visa waiver programme in the Schengen zone. \n"
+        f" \n"
         f"Enter the dates of your recent trips below "
         f"and you will find out how much \n of your "
         f"{visa_converted} days allowance you have still have available "
         f"as of today. \n" 
-        f"Only trips in the last {total_converted} days are  "
+        f" \n"
+        f"Only trips in the last {total_converted} days are "
         f"relevant and only historic (not future) \ntrips are counted here. \n"
         f"Your {total_converted} rolling period started on "
-        f"{restricted_period_starts.strftime('%d/%m/%Y')}, so only enter "
-        f"dates of trips \nfrom that period onwards, up until today's date. \n"
+        f"{restricted_period_starts.strftime('%d/%m/%Y')}, so please enter "
+        f"dates of trips \n between that period until today's date. \n"
     )
 
 
