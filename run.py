@@ -216,7 +216,6 @@ def calculate_days_left(trip_list):
     Function to calculate the days between user entered trips.
     Returns string of days.
     """
-    # send_allowance_data = []
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
     visa_converted = int(visa_range[0])
@@ -228,13 +227,11 @@ def calculate_days_left(trip_list):
     days_remaining = visa_converted - total_days
     
     print(
-        f"Your trip was {days_between} days long. \n"
+        f"Your trip was {total_days} days long. \n"
         f"As of today, you have {days_remaining} days left of your "
         f"visa waiver allowance.")
-    # send_allowance_data.append(days_remaining)
 
-    # return send_allowance_data
-
+    return days_remaining
 
 def main():
     observed_period_start()
@@ -249,13 +246,10 @@ def main():
         if another_trip == ("n"):
             break
 
-    calculate_days_left(trip_list) 
-
-
-    # days_remaining = calculate_days_left(send_allowance_data)
-    # days_available = SHEET.worksheet("days_available")
-    # update_gsheet(days_remaining, "days_available")
-
+    days_remaining = calculate_days_left(trip_list)
+    data = [days_remaining]
+    worksheet_to_update = SHEET.worksheet('days_available')
+    worksheet_to_update.append_row(data)
 
 main()
 
