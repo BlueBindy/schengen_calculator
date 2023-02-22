@@ -207,12 +207,24 @@ def check_end_date_valid(start_date, end_date):
 
     return True
 
+def update_gsheet(days_remaining, gsheet):
+    """
+    Receives a list(??) of integers(??) to be added back to worksheet
+    Update the named Google worksheet with the calculated availability.
+    """
+    gsheet_to_update = SHEET.worksheet(gsheet)
+    gsheet_to_update.append_row(days_remaining)
+    print(
+        f"Your anonymised remaining allowance has been added "
+        f"to the central database\n")
+
 
 def calculate_days_left(trip_list):
     """
     Function to calculate the days between user entered trips.
     Returns string of days.
     """
+    send_allowance_data = []
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
     visa_converted = int(visa_range[0])
@@ -226,11 +238,17 @@ def calculate_days_left(trip_list):
         f"Your trip was {days_between} days long. \n"
         f"As of today, you have {days_remaining} days left of your "
         f"visa waiver allowance.")
+    send_allowance_data.append(days_remaining)
+
+    return send_allowance_data
 
 
 def main():
     observed_period_start()
     calculate_trips()
+    days_remaining = calculate_days_left(send_allowance_data)
+    days_available = SHEET.worksheet("days_available")
+    update_gsheet(days_remaining, "days_available")
 
 
 main()
