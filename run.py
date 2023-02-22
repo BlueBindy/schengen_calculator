@@ -210,13 +210,19 @@ def calculate_days_left(trip_list):
     Function to calculate the days between user entered trips.
     Returns string of days.
     """
-    # print('called calculate days function')
+    visa_period = SHEET.worksheet('visa_allowance').get_all_values()
+    visa_range = visa_period[1]
+    visa_converted = int(visa_range[0])
     for start_date_str, end_date_str in trip_list:
         start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
         end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
         delta = end_date - start_date
         days_between = delta.days
-    print(f"Trip from {start_date_str} to {end_date_str} was {days_between} days long.")
+    days_remaining = visa_converted - days_between
+    print(
+        f"Your trip was {days_between} days long. \n"
+        f"As of today, you have {days_remaining} days left on your "
+        f"visa waiver allowance.")
 
 
 def main():
