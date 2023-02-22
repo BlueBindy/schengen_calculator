@@ -61,15 +61,15 @@ def observed_period_start():
         f"on a visa waiver programme in the Schengen zone. \n"
         f" \n"
         f"Enter the dates of your recent trips below "
-        f"and you will find out how much \n of your "
+        f"and you will find out how much \nof your "
         f"{visa_converted} days allowance you have still have available "
         f"as of today. \n" 
         f" \n"
         f"Only trips in the last {total_converted} days are "
-        f"relevant and only historic (not future) \ntrips are counted here. \n"
+        f"relevant and only historic (not future) \ntrips are counted here. "
         f"Your {total_converted} rolling period started on "
-        f"{restricted_period_starts.strftime('%d/%m/%Y')}, so please enter "
-        f"dates of trips \n between that period until today's date. \n"
+        f"{restricted_period_starts.strftime('%d/%m/%Y')}, \nso please enter "
+        f"dates of trips between then and today's date. \n"
     )
 
 
@@ -224,7 +224,7 @@ def calculate_days_left(trip_list):
     days_remaining = visa_converted - days_between
     print(
         f"Your trip was {days_between} days long. \n"
-        f"As of today, you have {days_remaining} days left on your "
+        f"As of today, you have {days_remaining} days left of your "
         f"visa waiver allowance.")
 
 
