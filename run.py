@@ -73,7 +73,7 @@ def observed_period_start():
     )
 
 
-def calculate_trips():
+def calculate_trip():
     """
     Get start date of trip from user. Validate for valid date, trip
     begins after restricted_period_starts and before today's date.
@@ -98,16 +98,16 @@ def calculate_trips():
     )
     # note data is string, need to convert to datetime object
     # using the datetime.strptime method.
-    trip_list = []
     start_date = input("Enter the date your trip started as dd/mm/yyyy:\n")
     if validate_dates(start_date):
         if check_start_date_current(start_date):
             # print blank statement to add a blank line
             print(" ")
         else:
-            return
+            raise Exception('Foo')
     else:
-        return
+        raise Exception('Foo')
+
 
     print(
         f"The last day of your trip must be after {start_date} "
@@ -119,21 +119,11 @@ def calculate_trips():
             # print blank statement to add a blank line
             print(" ")
         else:
-            return
+            raise Exception('Foo')
     else:
-        return
+        raise Exception('Foo')
+    return (start_date, end_date)
 
-    trip_list.append((start_date, end_date))
-
-    def ask_another_trip(trip_list):
-        while True:
-            another_trip = input("Do you want to add another trip? Y/N :\n")
-            if another_trip == ("n"):
-                calculate_days_left(trip_list)
-                break
-            else:
-                calculate_trips(trip_list)
-    ask_another_trip(trip_list)
 
     # print(trip_list)
     return trip_list
@@ -224,7 +214,7 @@ def calculate_days_left(trip_list):
     Function to calculate the days between user entered trips.
     Returns string of days.
     """
-    send_allowance_data = []
+    # send_allowance_data = []
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
     visa_converted = int(visa_range[0])
@@ -238,17 +228,30 @@ def calculate_days_left(trip_list):
         f"Your trip was {days_between} days long. \n"
         f"As of today, you have {days_remaining} days left of your "
         f"visa waiver allowance.")
-    send_allowance_data.append(days_remaining)
+    # send_allowance_data.append(days_remaining)
 
-    return send_allowance_data
+    # return send_allowance_data
 
 
 def main():
     observed_period_start()
-    calculate_trips()
-    days_remaining = calculate_days_left(send_allowance_data)
-    days_available = SHEET.worksheet("days_available")
-    update_gsheet(days_remaining, "days_available")
+
+    trip_list = []
+
+    while True:
+        trip = calculate_trip()
+        trip_list.append(trip)
+
+        another_trip = input("Do you want to add another trip? Y/N :\n")
+        if another_trip == ("n"):
+            break
+
+    calculate_days_left(trip_list) 
+
+
+    # days_remaining = calculate_days_left(send_allowance_data)
+    # days_available = SHEET.worksheet("days_available")
+    # update_gsheet(days_remaining, "days_available")
 
 
 main()
