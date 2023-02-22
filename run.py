@@ -72,7 +72,6 @@ def observed_period_start():
         f"dates of trips between then and today's date. \n"
     )
 
-
 def calculate_trip():
     """
     Get start date of trip from user. Validate for valid date, trip
@@ -98,13 +97,21 @@ def calculate_trip():
     )
     # note data is string, need to convert to datetime object
     # using the datetime.strptime method.
-    start_date = input("Enter the date your trip started as dd/mm/yyyy:\n")
-    if validate_dates(start_date):
-        if check_start_date_current(start_date):
-            # print blank statement to add a blank line
-            print(" ")
-        else:
-            raise Exception('Foo')
+
+    while True:
+        start_date_str = input("Enter the date your trip started as dd/mm/yyyy:\n")
+        try:
+            start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
+            # start_date = valid_date(start_date_str) 
+            break
+        except ValueError as e:
+            print("Invalid date format, try again.")
+
+    # ... here we have a valid start_date which is of a date type
+
+    if check_start_date_current(start_date):
+        # print blank statement to add a blank line
+        print(" ")
     else:
         raise Exception('Foo')
 
@@ -113,34 +120,36 @@ def calculate_trip():
         f"The last day of your trip must be after {start_date} "
         f"and before {today}."
     )
-    end_date = input("Please enter the end date of your trip as dd/mm/yyyy: \n")
-    if validate_dates(end_date):
-        if check_end_date_valid(start_date, end_date):
-            # print blank statement to add a blank line
-            print(" ")
-        else:
-            raise Exception('Foo')
+    
+    while True:
+        end_date_str = input("Please enter the end date of your trip as dd/mm/yyyy: \n")
+        try:
+            end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
+            # end_date = valid_date(end_date_str) 
+            break
+        except ValueError as e:
+            print("Invalid date format, try again.")
+
+    if check_end_date_valid(start_date, end_date):
+        # print blank statement to add a blank line
+        print(" ")
     else:
         raise Exception('Foo')
+
     return (start_date, end_date)
-
-
-    # print(trip_list)
-    return trip_list
 
 
 def validate_dates(dates):
     """
     validate dates
     """
-    try:
-        date = datetime.strptime(dates, "%d/%m/%Y")
+    return datetime.strptime(dates, "%d/%m/%Y")
     # ValueError code based on Code Institute Walkthrough Project
     # Find out how to change error message to user friendly language
-    except ValueError as e:
-        print(f"Invalid dates: {e}, please try again.\n")
-        return False
-    return True
+    # except ValueError as e:
+      #  print(f"Invalid dates: {e}, please try again.\n")
+       # return False
+    # return True
 
 
 def check_start_date_current(start_date):
@@ -155,9 +164,8 @@ def check_start_date_current(start_date):
     restricted_period_starts = (
         datetime.today() - timedelta(days=total_converted)
     )
-    trips_date = datetime.strptime(start_date, '%d/%m/%Y')
 
-    if trips_date < restricted_period_starts:
+    if start_date < restricted_period_starts:
         print(
             f"The start date of your trip ({start_date}) is before your 180 "
             f"day period starts. Please enter a date after "
@@ -165,7 +173,7 @@ def check_start_date_current(start_date):
         )
         return False
 
-    if trips_date > datetime.today():
+    if start_date > datetime.today():
         print(
             f"The start date of your trip ({start_date}) is in the future."
             f" The trip period must be historical."
@@ -180,15 +188,14 @@ def check_end_date_valid(start_date, end_date):
     check user entered ends dates are after
     trip start date and before today's date.
     """
-    end_date_converted = datetime.strptime(end_date, '%d/%m/%Y')
-    if start_date < end_date:
+    if start_date > end_date:
         print(
             f"The end date of your trip ({end_date}) is before your trip "
             f"starts. Please enter a date after ({start_date}). "
         )
         return False
 
-    if end_date_converted > datetime.today():
+    if end_date > datetime.today():
         print(
             f"The start date of your trip ({start_date}) is in the future."
             f" The trip period must be historical."
@@ -218,12 +225,15 @@ def calculate_days_left(trip_list):
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
     visa_converted = int(visa_range[0])
+    total_days = 0 
     for start_date_str, end_date_str in trip_list:
         start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
         end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
         delta = end_date - start_date
         days_between = delta.days
-    days_remaining = visa_converted - days_between
+        total_days += days_between
+    days_remaining = visa_converted - total_days
+    
     print(
         f"Your trip was {days_between} days long. \n"
         f"As of today, you have {days_remaining} days left of your "
