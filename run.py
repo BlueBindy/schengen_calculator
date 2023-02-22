@@ -126,16 +126,14 @@ def calculate_trip():
         try:
             end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
             # end_date = valid_date(end_date_str) 
-            break
         except ValueError as e:
             print("Invalid date format, try again.")
+            continue
 
-    if check_end_date_valid(start_date, end_date):
-        # print blank statement to add a blank line
-        print(" ")
-    else:
-        raise Exception('Foo')
-
+        if check_end_date_valid(start_date, end_date):
+            # print blank statement to add a blank line
+            print(" ")
+            break
     return (start_date, end_date)
 
 
@@ -226,9 +224,7 @@ def calculate_days_left(trip_list):
     visa_range = visa_period[1]
     visa_converted = int(visa_range[0])
     total_days = 0 
-    for start_date_str, end_date_str in trip_list:
-        start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
-        end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
+    for start_date, end_date in trip_list:
         delta = end_date - start_date
         days_between = delta.days
         total_days += days_between
