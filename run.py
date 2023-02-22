@@ -54,16 +54,19 @@ def observed_period_start():
     )
 
     print(
-        f"Welcome to Schengen Calculator. Visa-exempt nationals are allowed "
-        f"{visa_converted} days in a rolling period of {total_converted} days "
-        f"on a visa waiver programme. Enter the dates of your "
-        f"recent trips below and you will find out how much of your "
-        f" {visa_converted} days allowance you have still have available  "
-        f"as of today. Only trips in the last {total_converted} days are  "
-        f"relevant and only historic (not future) are counted here. \n"
+        f"Welcome to Schengen Calculator. \n" 
+        f"Visa-exempt nationals are allowed {visa_converted} "
+        f"days in a rolling period of {total_converted} days "
+        f"on a visa waiver programme. \n" 
+        f"Enter the dates of your recent trips below "
+        f"and you will find out how much of your "
+        f"{visa_converted} days allowance you have still have available "
+        f"as of today. \n" 
+        f"Only trips in the last {total_converted} days are  "
+        f"relevant and only historic (not future) trips are counted here. \n"
         f"Your {total_converted} rolling period started on "
         f"{restricted_period_starts.strftime('%d/%m/%Y')}, so only enter "
-        f"dates of trips from that period onwards, up until today's date."
+        f"dates of trips from that period onwards, up until today's date. \n"
     )
 
 
@@ -85,19 +88,19 @@ def calculate_trips():
 
     today = datetime.today().strftime('%d/%m/%Y')
 
-    print("Please enter the start date of your trip as dd/mm/yyy")
     print(
-        f"The first day must be after "
+        f"The first day of your trip must be after "
         f"{restricted_period_starts.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
     # note data is string, need to convert to datetime object
     # using the datetime.strptime method.
     trip_list = []
-    start_date = input("Enter the date your trip started:\n")
+    start_date = input("Enter the date your trip started as dd/mm/yyyy:\n")
     if validate_dates(start_date):
         if check_start_date_current(start_date):
-            print("You entered a valid date:", start_date)
+            # print blank statement to add a blank line
+            print(" ")
         else:
             return
     else:
@@ -107,10 +110,11 @@ def calculate_trips():
         f"The last day of your trip must be after {start_date} "
         f"and before {today}."
     )
-    end_date = input("Please enter the end date of your trip: \n")
+    end_date = input("Please enter the end date of your trip as dd/mm/yyyy: \n")
     if validate_dates(end_date):
         if check_end_date_valid(start_date, end_date):
-            print("You entered a valid date:", end_date)
+            # print blank statement to add a blank line
+            print(" ")
         else:
             return
     else:
@@ -128,7 +132,7 @@ def calculate_trips():
                 calculate_trips(trip_list)
     ask_another_trip(trip_list)
 
-    print(trip_list)
+    # print(trip_list)
     return trip_list
 
 
