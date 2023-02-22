@@ -103,17 +103,14 @@ def calculate_trip():
         try:
             start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
             # start_date = valid_date(start_date_str) 
-            break
         except ValueError as e:
             print("Invalid date format, try again.")
+            continue
 
-    # ... here we have a valid start_date which is of a date type
-
-    if check_start_date_current(start_date):
-        # print blank statement to add a blank line
-        print(" ")
-    else:
-        raise Exception('Foo')
+        if check_start_date_current(start_date):
+            # print blank statement to add a blank line
+            print(" ")
+            break
 
 
     print(
