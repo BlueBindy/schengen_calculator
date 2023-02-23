@@ -60,6 +60,7 @@ def observed_period_start():
         f" Please note your anonymised allowance will be "
         f"added to a central database on \n completion. "
         f" \n"
+        f" \n"
         f" Only trips in the last {total_converted} days are "
         f"relevant and only historic (not future) \n trips are counted here. "
         f"Your {total_converted} rolling period started on "
@@ -155,7 +156,7 @@ def check_start_date_current(start_date):
         print(
             f" \n"
             f" The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is before your 180 "
-            f"day period starts. Please enter a date after "
+            f"day period starts.  Please enter a date after "
             f"{restricted_period_starts.strftime('%d/%m/%Y')}."
         )
         return False
@@ -164,7 +165,7 @@ def check_start_date_current(start_date):
         print(
             f" \n"
             f" The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
-            f" The trip period must be historical."
+            f" The trip period \n must be historical."
             )
         return False
     return True
@@ -179,7 +180,7 @@ def check_end_date_valid(start_date, end_date):
         print(
             f" \n"
             f" The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is before your trip "
-            f"starts. Please enter a date after ({start_date.strftime('%d/%m/%Y')}). "
+            f"starts.\n Please enter a date after ({start_date.strftime('%d/%m/%Y')}). "
         )
         return False
 
