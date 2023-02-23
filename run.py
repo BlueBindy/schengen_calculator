@@ -20,14 +20,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('schengen_calculator')
 
-# remove pprint before deployment
 # input statements need \n (new line character) to deploy
-# using this Github template
-
-# print('Welcome to 90 Days in 180. Enter the dates of your recent trips to
-# find out how much of your 90 days of tourist allowance in the past 180days
-# you have still available as of today. Only trips in the last 180 days are
-# relevant and only historic trips (not future) are counted here.')
+# while using this Github template
 
 
 def observed_period_start():
@@ -52,7 +46,7 @@ def observed_period_start():
     restricted_period_starts = (
         datetime.today() - timedelta(days=total_converted)
     )
-    # print blank, new lines included for readability
+    # print(" \n") included for readability
     print(
         f"Welcome to Schengen Calculator. \n"
         f" \n"
@@ -63,7 +57,7 @@ def observed_period_start():
         f"Enter the dates of your recent trips below "
         f"and you will find out how much \nof your "
         f"{visa_converted} days allowance you have still have available "
-        f"as of today. \n" 
+        f"as of today. \n"
         f" \n"
         f"Only trips in the last {total_converted} days are "
         f"relevant and only historic (not future) \ntrips are counted here. "
@@ -71,6 +65,7 @@ def observed_period_start():
         f"{restricted_period_starts.strftime('%d/%m/%Y')}, \nso please enter "
         f"dates of trips between then and today's date. \n"
     )
+
 
 def calculate_trip():
     """
@@ -95,14 +90,14 @@ def calculate_trip():
         f"{restricted_period_starts.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
-    # note data is string, need to convert to datetime object
+    # input data is string, need to convert to datetime object
     # using the datetime.strptime method.
 
     while True:
         start_date_str = input("Enter the date your trip started as dd/mm/yyyy:\n")
         try:
             start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
-            # start_date = valid_date(start_date_str) 
+            # start_date = valid_date(start_date_str)
         except ValueError as e:
             print("Invalid date format, try again.")
             continue
@@ -111,24 +106,22 @@ def calculate_trip():
             # print blank statement to add a blank line
             print(" ")
             break
-
-
     print(
         f"The last day of your trip must be after {start_date} "
         f"and before {today}."
     )
-    
+
     while True:
         end_date_str = input("Please enter the end date of your trip as dd/mm/yyyy: \n")
         try:
             end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
-            # end_date = valid_date(end_date_str) 
+            # end_date = valid_date(end_date_str)
         except ValueError as e:
             print("Invalid date format, try again.")
             continue
 
         if check_end_date_valid(start_date, end_date):
-            # print blank statement to add a blank line
+            # print(" ") to add a blank line for readability
             print(" ")
             break
     return (start_date, end_date)
@@ -139,12 +132,6 @@ def validate_dates(dates):
     validate dates
     """
     return datetime.strptime(dates, "%d/%m/%Y")
-    # ValueError code based on Code Institute Walkthrough Project
-    # Find out how to change error message to user friendly language
-    # except ValueError as e:
-      #  print(f"Invalid dates: {e}, please try again.\n")
-       # return False
-    # return True
 
 
 def check_start_date_current(start_date):
@@ -174,7 +161,6 @@ def check_start_date_current(start_date):
             f" The trip period must be historical."
             )
         return False
-
     return True
 
 
@@ -199,17 +185,6 @@ def check_end_date_valid(start_date, end_date):
 
     return True
 
-def update_gsheet(days_remaining, gsheet):
-    """
-    Receives a list(??) of integers(??) to be added back to worksheet
-    Update the named Google worksheet with the calculated availability.
-    """
-    gsheet_to_update = SHEET.worksheet(gsheet)
-    gsheet_to_update.append_row(days_remaining)
-    print(
-        f"Your anonymised remaining allowance has been added "
-        f"to the central database\n")
-
 
 def calculate_days_left(trip_list):
     """
@@ -219,19 +194,20 @@ def calculate_days_left(trip_list):
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
     visa_converted = int(visa_range[0])
-    total_days = 0 
+    total_days = 0
     for start_date, end_date in trip_list:
         delta = end_date - start_date
         days_between = delta.days
         total_days += days_between
     days_remaining = visa_converted - total_days
-    
+
     print(
         f"Your trip was {total_days} days long. \n"
         f"As of today, you have {days_remaining} days left of your "
         f"visa waiver allowance.")
 
     return days_remaining
+
 
 def main():
     observed_period_start()
@@ -250,16 +226,10 @@ def main():
     data = [days_remaining]
     worksheet_to_update = SHEET.worksheet('days_available')
     worksheet_to_update.append_row(data)
+    print(
+        f"Your anonymised remaining allowance has been added "
+        f"to the central database.\n"
+    )
+
 
 main()
-
-# next step: ask user for another trip or calculate
-# next step2: calculate and give user a response
-# next step3: push remaining allowance to gsheet.
-
-
-# get today's date and convert to dd/mm/yyyy
-# Returns the current local date as a string from datetime module import
-# using strftime to format as dd/mm/yyyyy.
-# today = datetime.today().strftime('%d/%m/%Y')
-# restricted_period_starts.strftime('%d/%m/%Y'))
