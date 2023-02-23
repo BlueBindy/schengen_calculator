@@ -57,8 +57,8 @@ def observed_period_start():
         f"and you will find out how much \n of your "
         f"{visa_converted} days allowance you have still have available "
         f"as of today. \n"
-        f"Please note your anonymised allowance will be "
-        f"added to a central database on completion. "
+        f" Please note your anonymised allowance will be "
+        f"added to a central database on \n completion. "
         f" \n"
         f" Only trips in the last {total_converted} days are "
         f"relevant and only historic (not future) \n trips are counted here. "
@@ -112,7 +112,7 @@ def calculate_trip():
     )
 
     while True:
-        end_date_str = input("Please enter the end date of your trip as dd/mm/yyyy: \n")
+        end_date_str = input(" Please enter the end date of your trip as dd/mm/yyyy: \n")
         try:
             end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
         except ValueError as e:
@@ -170,7 +170,7 @@ def check_end_date_valid(start_date, end_date):
     """
     if start_date > end_date:
         print(
-            f"The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is before your trip "
+            f" The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is before your trip "
             f"starts. Please enter a date after ({start_date.strftime('%d/%m/%Y')}). "
         )
         return False
@@ -201,8 +201,8 @@ def calculate_days_left(trip_list):
     days_remaining = visa_converted - total_days
 
     print(
-        f"Your trip was {total_days} day/s long. \n"
-        f"As of today, you have {days_remaining} day/s left of your "
+        f" Your trip was {total_days} day/s long. \n"
+        f" As of today, you have {days_remaining} day/s left of your "
         f"visa waiver allowance.")
 
     return days_remaining
@@ -217,7 +217,7 @@ def main():
         trip = calculate_trip()
         trip_list.append(trip)
 
-        another_trip = input("Do you want to add another trip? Y/N :\n")
+        another_trip = input(" Do you want to add another trip? Y/N :\n")
         if another_trip == ("n"):
             break
 
@@ -226,7 +226,7 @@ def main():
     worksheet_to_update = SHEET.worksheet('days_available')
     worksheet_to_update.append_row(data)
     print(
-        f"Your anonymised remaining allowance has been added "
+        f" Your anonymised remaining allowance has been added "
         f"to the central database.\n"
     )
 
