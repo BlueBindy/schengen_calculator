@@ -47,23 +47,23 @@ def observed_period_start():
     )
     # print(" \n") included for readability
     print(
-        f"Welcome to Schengen Calculator. \n"
+        f" Welcome to Schengen Calculator. \n"
         f" \n"
-        f"Visa-exempt nationals are allowed {visa_converted} "
+        f" Visa-exempt nationals are allowed {visa_converted} "
         f"days in a rolling period of {total_converted} days \n"
-        f"on a visa waiver programme in the Schengen zone. \n"
+        f" on a visa waiver programme in the Schengen zone. \n"
         f" \n"
-        f"Enter the dates of your recent trips below "
-        f"and you will find out how much \nof your "
+        f" Enter the dates of your recent trips below "
+        f"and you will find out how much \n of your "
         f"{visa_converted} days allowance you have still have available "
-        f"as of today. "
+        f"as of today. \n"
         f"Please note your anonymised allowance will be "
         f"added to a central database on completion. "
         f" \n"
-        f"Only trips in the last {total_converted} days are "
-        f"relevant and only historic (not future) \ntrips are counted here. "
+        f" Only trips in the last {total_converted} days are "
+        f"relevant and only historic (not future) \n trips are counted here. "
         f"Your {total_converted} rolling period started on "
-        f"{restricted_period_starts.strftime('%d/%m/%Y')}, \nso please enter "
+        f"{restricted_period_starts.strftime('%d/%m/%Y')}, \n so please enter "
         f"dates of trips between then and today's date. \n"
     )
 
@@ -87,7 +87,7 @@ def calculate_trip():
     today = datetime.today().strftime('%d/%m/%Y')
 
     print(
-        f"The first day of your trip must be after "
+        f" The first day of your trip must be after "
         f"{restricted_period_starts.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
@@ -95,7 +95,7 @@ def calculate_trip():
     # using the datetime.strptime method.
 
     while True:
-        start_date_str = input("Enter the date your trip started as dd/mm/yyyy:\n")
+        start_date_str = input(" Enter the date your trip started as dd/mm/yyyy:\n")
         try:
             start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
         except ValueError as e:
@@ -107,7 +107,7 @@ def calculate_trip():
             print(" ")
             break
     print(
-        f"The last day of your trip must be after {start_date.strftime('%d/%m/%Y')} "
+        f" The last day of your trip must be after {start_date.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
 
