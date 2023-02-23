@@ -87,6 +87,7 @@ def calculate_trip():
     today = datetime.today().strftime('%d/%m/%Y')
 
     print(
+        f" \n"
         f" The first day of your trip must be after "
         f"{restricted_period_starts.strftime('%d/%m/%Y')} "
         f"and before {today}."
@@ -99,7 +100,10 @@ def calculate_trip():
         try:
             start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
         except ValueError as e:
-            print("Invalid date format, try again.")
+            print(
+                " \n"
+                " Invalid date format, try again."
+                )
             continue
 
         if check_start_date_current(start_date):
@@ -107,6 +111,7 @@ def calculate_trip():
             print(" ")
             break
     print(
+        f" \n"
         f" The last day of your trip must be after {start_date.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
@@ -148,7 +153,8 @@ def check_start_date_current(start_date):
 
     if start_date < restricted_period_starts:
         print(
-            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is before your 180 "
+            f" \n"
+            f" The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is before your 180 "
             f"day period starts. Please enter a date after "
             f"{restricted_period_starts.strftime('%d/%m/%Y')}."
         )
@@ -156,7 +162,8 @@ def check_start_date_current(start_date):
 
     if start_date > datetime.today():
         print(
-            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
+            f" \n"
+            f" The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
             f" The trip period must be historical."
             )
         return False
@@ -170,6 +177,7 @@ def check_end_date_valid(start_date, end_date):
     """
     if start_date > end_date:
         print(
+            f" \n"
             f" The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is before your trip "
             f"starts. Please enter a date after ({start_date.strftime('%d/%m/%Y')}). "
         )
@@ -177,6 +185,7 @@ def check_end_date_valid(start_date, end_date):
 
     if end_date > datetime.today():
         print(
+            f" \n"
             f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
             f" The trip period must be historical."
             )
@@ -201,6 +210,7 @@ def calculate_days_left(trip_list):
     days_remaining = visa_converted - total_days
 
     print(
+        f" \n"
         f" Your trip was {total_days} day/s long. \n"
         f" As of today, you have {days_remaining} day/s left of your "
         f"visa waiver allowance.")
@@ -226,6 +236,7 @@ def main():
     worksheet_to_update = SHEET.worksheet('days_available')
     worksheet_to_update.append_row(data)
     print(
+        f" \n"
         f" Your anonymised remaining allowance has been added "
         f"to the central database.\n"
     )
