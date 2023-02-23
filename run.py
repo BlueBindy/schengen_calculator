@@ -1,4 +1,6 @@
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+# Deployed terminal is 80 characters wide and 24 rows high
+# Input statements need \n (new line character) to deploy
+# while using this Github template
 # Import Google Sheet class from Google module
 import gspread
 from google.oauth2.service_account import Credentials
@@ -19,9 +21,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('schengen_calculator')
-
-# input statements need \n (new line character) to deploy
-# while using this Github template
 
 
 def observed_period_start():
@@ -57,7 +56,8 @@ def observed_period_start():
         f"Enter the dates of your recent trips below "
         f"and you will find out how much \nof your "
         f"{visa_converted} days allowance you have still have available "
-        f"as of today. Please note your anonymised allowance will be "
+        f"as of today. "
+        f"Please note your anonymised allowance will be "
         f"added to a central database on completion. "
         f" \n"
         f"Only trips in the last {total_converted} days are "
@@ -107,7 +107,7 @@ def calculate_trip():
             print(" ")
             break
     print(
-        f"The last day of your trip must be after {start_date} "
+        f"The last day of your trip must be after {start_date.strftime('%d/%m/%Y')} "
         f"and before {today}."
     )
 
@@ -126,11 +126,11 @@ def calculate_trip():
     return (start_date, end_date)
 
 
-def validate_dates(dates):
-    """
-    validate dates
-    """
-    return datetime.strptime(dates, "%d/%m/%Y")
+# def validate_dates(dates):
+  #  """
+   # validate dates
+   # """
+   # return datetime.strptime(dates, "%d/%m/%Y")
 
 
 def check_start_date_current(start_date):
@@ -148,7 +148,7 @@ def check_start_date_current(start_date):
 
     if start_date < restricted_period_starts:
         print(
-            f"The start date of your trip ({start_date}) is before your 180 "
+            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is before your 180 "
             f"day period starts. Please enter a date after "
             f"{restricted_period_starts.strftime('%d/%m/%Y')}."
         )
@@ -156,7 +156,7 @@ def check_start_date_current(start_date):
 
     if start_date > datetime.today():
         print(
-            f"The start date of your trip ({start_date}) is in the future."
+            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
             f" The trip period must be historical."
             )
         return False
@@ -170,14 +170,14 @@ def check_end_date_valid(start_date, end_date):
     """
     if start_date > end_date:
         print(
-            f"The end date of your trip ({end_date}) is before your trip "
-            f"starts. Please enter a date after ({start_date}). "
+            f"The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is before your trip "
+            f"starts. Please enter a date after ({start_date.strftime('%d/%m/%Y')}). "
         )
         return False
 
     if end_date > datetime.today():
         print(
-            f"The start date of your trip ({start_date}) is in the future."
+            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
             f" The trip period must be historical."
             )
         return False
@@ -201,8 +201,8 @@ def calculate_days_left(trip_list):
     days_remaining = visa_converted - total_days
 
     print(
-        f"Your trip was {total_days} days long. \n"
-        f"As of today, you have {days_remaining} days left of your "
+        f"Your trip was {total_days} day/s long. \n"
+        f"As of today, you have {days_remaining} day/s left of your "
         f"visa waiver allowance.")
 
     return days_remaining
