@@ -113,8 +113,8 @@ def calculate_trip():
             break
     print(
         f" \n"
-        f" The last day of your trip must be after {start_date.strftime('%d/%m/%Y')} "
-        f"and before {today}."
+        f" The last day of your trip must be after "
+        f"{start_date.strftime('%d/%m/%Y')} and before {today}."
     )
 
     while True:
@@ -130,13 +130,6 @@ def calculate_trip():
             print(" ")
             break
     return (start_date, end_date)
-
-
-# def validate_dates(dates):
-  #  """
-   # validate dates
-   # """
-   # return datetime.strptime(dates, "%d/%m/%Y")
 
 
 def check_start_date_current(start_date):
@@ -155,7 +148,9 @@ def check_start_date_current(start_date):
     if start_date < restricted_period_starts:
         print(
             f" \n"
-            f" The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is before your 180 "
+            f" The start date of your trip "
+            f"({start_date.strftime('%d/%m/%Y')}) "
+            f"is before your 180 "
             f"day period starts.  Please enter a date after "
             f"{restricted_period_starts.strftime('%d/%m/%Y')}."
         )
@@ -164,7 +159,9 @@ def check_start_date_current(start_date):
     if start_date > datetime.today():
         print(
             f" \n"
-            f" The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
+            f" The start date of your trip "
+            f"({start_date.strftime('%d/%m/%Y')}) "
+            f"is in the future."
             f" The trip period \n must be historical."
             )
         return False
@@ -179,15 +176,18 @@ def check_end_date_valid(start_date, end_date):
     if start_date > end_date:
         print(
             f" \n"
-            f" The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is before your trip "
-            f"starts.\n Please enter a date after ({start_date.strftime('%d/%m/%Y')}). "
+            f" The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is "
+            f"before your trip "
+            f"starts.\n Please enter a date after "
+            f"({start_date.strftime('%d/%m/%Y')}). "
         )
         return False
 
     if end_date > datetime.today():
         print(
             f" \n"
-            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) is in the future."
+            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) "
+            f"is in the future."
             f" The trip period must be historical."
             )
         return False
