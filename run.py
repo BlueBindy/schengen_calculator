@@ -57,7 +57,8 @@ def observed_period_start():
         f"Enter the dates of your recent trips below "
         f"and you will find out how much \nof your "
         f"{visa_converted} days allowance you have still have available "
-        f"as of today. \n"
+        f"as of today. Please note your anonymised allowance will be "
+        f"added to a central database on completion. "
         f" \n"
         f"Only trips in the last {total_converted} days are "
         f"relevant and only historic (not future) \ntrips are counted here. "
@@ -97,7 +98,6 @@ def calculate_trip():
         start_date_str = input("Enter the date your trip started as dd/mm/yyyy:\n")
         try:
             start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
-            # start_date = valid_date(start_date_str)
         except ValueError as e:
             print("Invalid date format, try again.")
             continue
@@ -115,7 +115,6 @@ def calculate_trip():
         end_date_str = input("Please enter the end date of your trip as dd/mm/yyyy: \n")
         try:
             end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
-            # end_date = valid_date(end_date_str)
         except ValueError as e:
             print("Invalid date format, try again.")
             continue
