@@ -131,7 +131,6 @@ def calculate_trip():
             break
     return (start_date, end_date)
 
-
 def check_start_date_current(start_date):
     """
     check user entered start dates are after
@@ -229,8 +228,12 @@ def main():
         trip_list.append(trip)
 
         another_trip = input(" Do you want to add another trip? Y/N :\n")
-        if another_trip == ("n"):
+        if another_trip.lower() in ("y", "yes"):
+            continue
+        elif another_trip.lower() in ("n", "no"):
             break
+        else:
+            print("Invalid entry, please try Y or N ")  
 
     days_remaining = calculate_days_left(trip_list)
     data = [days_remaining]
