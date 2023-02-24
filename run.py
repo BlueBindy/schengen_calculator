@@ -97,7 +97,10 @@ def calculate_trip():
     # using the datetime.strptime method.
 
     while True:
-        start_date_str = input(" Enter the date your trip started as dd/mm/yyyy:\n")
+        start_date_str = input(
+            " Enter the date your trip started "
+            "as dd/mm/yyyy:\n"
+            )
         try:
             start_date = datetime.strptime(start_date_str, "%d/%m/%Y")
         except ValueError as e:
@@ -118,7 +121,10 @@ def calculate_trip():
     )
 
     while True:
-        end_date_str = input(" Please enter the end date of your trip as dd/mm/yyyy: \n")
+        end_date_str = input(
+            " Please enter the end date of your trip "
+            "as dd/mm/yyyy: \n"
+            )
         try:
             end_date = datetime.strptime(end_date_str, "%d/%m/%Y")
         except ValueError as e:
@@ -130,6 +136,7 @@ def calculate_trip():
             print(" ")
             break
     return (start_date, end_date)
+
 
 def check_start_date_current(start_date):
     """
@@ -233,7 +240,7 @@ def main():
         elif another_trip.lower() in ("n", "no"):
             break
         else:
-            print("Invalid entry, please try Y or N ")  
+            print("Invalid entry, please try Y or N ")
 
     days_remaining = calculate_days_left(trip_list)
     data = [days_remaining]
