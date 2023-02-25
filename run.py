@@ -25,15 +25,17 @@ SHEET = GSPREAD_CLIENT.open('schengen_calculator')
 
 def observed_period_start():
     """
-    Get period of restricted travel from sheet as a list, convert to an
-    integer and subtract from today's date using datetime and timedelta
-    classes in datetimemodule. Class datetime returns a datetime object,
-    which allows operations like subtraction to be calculated. Standard
-    datetime format (YYYY-MM-DDTHH:MM:SS. mmmmmm) converted to dd/mm/yyyy
-    during print statement as .strftime() returns a string which does
-    not allow for operations. Suggestion of timedelta module to calculate
-    date from Steve B. from StackOverflow.
+    Get period of visa waiver days and relevant date range from sheet as a list, 
+    convert to an integer and subtract from today's date using
+    datetime and timedelta classes in datetimemodule.
+    Class datetime returns a datetime object, which allows operations.
+    Standard datetime format (YYYY-MM-DDTHH:MM:SS. mmmmmm)
+    converted to dd/mm/yyyy during print statement as
+    .strftime() returns a string (does not allow for operations.)
+    Present user with programme instructions.
     """
+    # Suggestion of timedelta module to calculate date from Steve B.
+    # from StackOverflow.
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
     visa_converted = int(visa_range[0])
@@ -71,11 +73,14 @@ def observed_period_start():
 
 def calculate_trip():
     """
-    Get start date of trip from user. Validate for valid date, trip
+    Get start of relevant date range from Google sheet as a list 
+    and convert to an integer. Subtract from today's date. 
+    Get start date of trip from user. Input returned as string converted
+    to datetime object using .strptime. Validate for valid date, trip
     begins after restricted_period_starts and before today's date.
-    Get end date of trip from user. Validate for valid date, trip
-    begins after trip starts and before today's date. Append trip to
-    variable and ask user for another trip or to calculate.
+    Get end date of trip from user, convert to datetime object. 
+    Validate for valid date, trip begins after trip starts and before 
+    today's date. Return start_date, end_date as datetime objects.
     """
     total_period = SHEET.worksheet('restricted_period').get_all_values()
     total_range = total_period[1]
@@ -140,10 +145,13 @@ def calculate_trip():
 
 def check_start_date_current(start_date):
     """
-    check user entered start dates are after
+    Get start of relevant date range from Google sheet as a list 
+    and convert to an integer. Subtract from today's date.
+    Check user entered start dates are after
     restricted_period_starts and before today's date.
     """
-    # Use of operands on dates suggested by Paolo Moretti, StackOverflow
+    # Use of operands on datetime objects suggested by Paolo Moretti, 
+    # StackOverflow
     total_period = SHEET.worksheet('restricted_period').get_all_values()
     total_range = total_period[1]
     total_converted = int(total_range[0])
@@ -176,7 +184,7 @@ def check_start_date_current(start_date):
 
 def check_end_date_valid(start_date, end_date):
     """
-    check user entered ends dates are after
+    Check user entered ends dates are after
     trip start date and before today's date.
     """
     if start_date > end_date:
@@ -203,8 +211,9 @@ def check_end_date_valid(start_date, end_date):
 
 def calculate_days_left(trip_list):
     """
-    Function to calculate the days between user entered trips.
-    Returns string of days.
+    Get visa waiver period from Google sheet as a list, convert to an 
+    integer. Using trip_list passed from main(), calculate the days 
+    between user entered trips.
     """
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
@@ -226,6 +235,12 @@ def calculate_days_left(trip_list):
 
 
 def main():
+    """
+    Call obseved_period_start, append trip start and end dates as tuples in 
+    trip_list. Asks users if they want to include additional trips and then
+    calls function to calculate days used and days remaining and inform user. 
+    Days remaining appended to Google spreadsheet and user informed.
+    """
     observed_period_start()
 
     trip_list = []
@@ -241,6 +256,7 @@ def main():
             break
         else:
             print("Invalid entry, please try Y or N ")
+            # call another_trip again here, not calculate_trip
 
     days_remaining = calculate_days_left(trip_list)
     data = [days_remaining]
