@@ -247,13 +247,16 @@ def main():
     trip_list = []
 
     while True:
-        
         trip = get_user_trip()
         trip_list.append(trip)
         # use of .strip() at Brian Macharia's suggestion
-        # use of .strftime on list comprehension based on Steve B. suggestion, Stack Overflow
+        # use of .strftime on list comprehension based on Steve B.
+        # suggestion, Stack Overflow
         while True:
-            date_str = [(dt[0].strftime("%d/%m/%Y"), dt[1].strftime("%d/%m/%Y")) for dt in trip_list]
+            date_str = [
+                (dt[0].strftime("%d/%m/%Y"), dt[1].strftime("%d/%m/%Y"))
+                for dt in trip_list
+                ]
             another_trip = input(
                 f'Your current trip dates are: {date_str}. '
                 f'Do you want to add another trip? Y/N :\n'
@@ -266,9 +269,6 @@ def main():
             continue
         else:
             break
-            
-            
-        
 
     days_remaining = calculate_days_left(trip_list)
     data = [days_remaining]
