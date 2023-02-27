@@ -25,8 +25,8 @@ SHEET = GSPREAD_CLIENT.open('schengen_calculator')
 
 def observed_period_start():
     """
-    Get period of visa waiver days and relevant date range from sheet as a list, 
-    convert to an integer and subtract from today's date using
+    Get period of visa waiver days and relevant date range from sheet,
+    as a list convert to an integer and subtract from today's date using
     datetime and timedelta classes in datetimemodule.
     Class datetime returns a datetime object, which allows operations.
     Standard datetime format (YYYY-MM-DDTHH:MM:SS. mmmmmm)
@@ -73,13 +73,13 @@ def observed_period_start():
 
 def calculate_trip():
     """
-    Get start of relevant date range from Google sheet as a list 
-    and convert to an integer. Subtract from today's date. 
+    Get start of relevant date range from Google sheet as a list
+    and convert to an integer. Subtract from today's date.
     Get start date of trip from user. Input returned as string converted
     to datetime object using .strptime. Validate for valid date, trip
     begins after restricted_period_starts and before today's date.
-    Get end date of trip from user, convert to datetime object. 
-    Validate for valid date, trip begins after trip starts and before 
+    Get end date of trip from user, convert to datetime object.
+    Validate for valid date, trip begins after trip starts and before
     today's date. Return start_date, end_date as datetime objects.
     """
     total_period = SHEET.worksheet('restricted_period').get_all_values()
@@ -145,12 +145,12 @@ def calculate_trip():
 
 def check_start_date_current(start_date):
     """
-    Get start of relevant date range from Google sheet as a list 
+    Get start of relevant date range from Google sheet as a list
     and convert to an integer. Subtract from today's date.
     Check user entered start dates are after
     restricted_period_starts and before today's date.
     """
-    # Use of operands on datetime objects suggested by Paolo Moretti, 
+    # Use of operands on datetime objects suggested by Paolo Moretti,
     # StackOverflow
     total_period = SHEET.worksheet('restricted_period').get_all_values()
     total_range = total_period[1]
@@ -211,8 +211,8 @@ def check_end_date_valid(start_date, end_date):
 
 def calculate_days_left(trip_list):
     """
-    Get visa waiver period from Google sheet as a list, convert to an 
-    integer. Using trip_list passed from main(), calculate the days 
+    Get visa waiver period from Google sheet as a list, convert to an
+    integer. Using trip_list passed from main(), calculate the days
     between user entered trips.
     """
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
@@ -236,9 +236,9 @@ def calculate_days_left(trip_list):
 
 def main():
     """
-    Call obseved_period_start, append trip start and end dates as tuples in 
+    Call obseved_period_start, append trip start and end dates as tuples in
     trip_list. Asks users if they want to include additional trips and then
-    calls function to calculate days used and days remaining and inform user. 
+    calls function to calculate days used and days remaining and inform user.
     Days remaining appended to Google spreadsheet and user informed.
     """
     observed_period_start()
