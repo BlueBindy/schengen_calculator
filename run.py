@@ -251,8 +251,13 @@ def main():
         trip = get_user_trip()
         trip_list.append(trip)
         # use of .strip() at Brian Macharia's suggestion
+        # use of .strftime on list comprehension based on Steve B. suggestion, Stack Overflow
         while True:
-            another_trip = input(' Do you want to add another trip? Y/N :\n').lower().strip()
+            date_str = [(dt[0].strftime("%d/%m/%Y"), dt[1].strftime("%d/%m/%Y")) for dt in trip_list]
+            another_trip = input(
+                f'Your current trip dates are: {date_str}. '
+                f'Do you want to add another trip? Y/N :\n'
+            ).lower().strip()
             if another_trip not in ('y', 'yes', 'n', 'no'):
                 print('Input must be Y or N')
             else:
