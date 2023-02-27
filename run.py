@@ -59,15 +59,15 @@ def observed_period_start():
         f'and you will find out how much \n of your '
         f'{visa_converted} days allowance you have still have available '
         f'as of today. \n'
-        f'' Please note your anonymised allowance will be '
+        f' Please note your anonymised allowance will be '
         f'added to a central database on \n completion. '
         f' \n'
         f' \n'
         f' Only trips in the last {total_converted} days are '
         f'relevant and only historic (not future) \n trips are counted here. '
         f'Your {total_converted} rolling period started on '
-        f'{restricted_period_starts.strftime('%d/%m/%Y')}, \n so please enter '
-        f'dates of trips between then and today's date. \n'
+        f"{restricted_period_starts.strftime('%d/%m/%Y')}, \n so please enter "
+        f"dates of trips between then and today's date. \n"
     )
 
 
@@ -122,7 +122,7 @@ def calculate_trip():
     print(
         f' \n'
         f' The last day of your trip must be after '
-        f'{start_date.strftime('%d/%m/%Y')} and before {today}.'
+        f"{start_date.strftime('%d/%m/%Y')} and before {today}."
     )
 
     while True:
@@ -166,7 +166,7 @@ def check_start_date_current(start_date):
             f"({start_date.strftime('%d/%m/%Y')}) "
             f'is before your 180 '
             f'day period starts.  Please enter a date after '
-            f'{restricted_period_starts.strftime('%d/%m/%Y')}.'
+            f"{restricted_period_starts.strftime('%d/%m/%Y')}."
         )
         return False
 
@@ -190,7 +190,7 @@ def check_end_date_valid(start_date, end_date):
     if start_date > end_date:
         print(
             f' \n'
-            f' The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is '
+            f" The end date of your trip ({end_date.strftime('%d/%m/%Y')}) is "
             f'before your trip '
             f'starts.\n Please enter a date after '
             f"({start_date.strftime('%d/%m/%Y')}). "
@@ -200,7 +200,7 @@ def check_end_date_valid(start_date, end_date):
     if end_date > datetime.today():
         print(
             f' \n'
-            f'The start date of your trip ({start_date.strftime('%d/%m/%Y')}) '
+            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) "
             f'is in the future.'
             f' The trip period must be historical.'
             )
@@ -247,12 +247,10 @@ def main():
     trip_list = []
 
     while True:
-        #try:
+        
         trip = calculate_trip()
         trip_list.append(trip)
-        #except:
-         #   print('Invalid data, please try again.')
-          #  continue
+        
         another_trip = input(' Do you want to add another trip? Y/N :\n')
         if another_trip.lower() in ('y', 'yes'):
             continue
@@ -261,8 +259,7 @@ def main():
         else:
             print('Invalid entry, please try Y or N ')
             continue
-            # trigger another_trip loop again here, not calculate_trip
-        # experiment with try statements, ValueError
+            
         
 
     days_remaining = calculate_days_left(trip_list)
