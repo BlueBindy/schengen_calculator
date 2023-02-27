@@ -250,15 +250,18 @@ def main():
         
         trip = calculate_trip()
         trip_list.append(trip)
-        
-        another_trip = input(' Do you want to add another trip? Y/N :\n')
-        if another_trip.lower() in ('y', 'yes'):
+        # use of .strip() at Brian Macharia's suggestion
+        while True:
+            another_trip = input(' Do you want to add another trip? Y/N :\n').lower().strip()
+            if another_trip not in ('y', 'yes', 'n', 'no'):
+                print('Input must be Y or N')
+            else:
+                break
+        if another_trip in ('y', 'yes'):
             continue
-        elif another_trip.lower() in ('n', 'no'):
-            break
         else:
-            print('Invalid entry, please try Y or N ')
-            continue
+            break
+            
             
         
 
