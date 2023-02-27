@@ -71,7 +71,7 @@ def observed_period_start():
     )
 
 
-def calculate_trip():
+def get_user_trip():
     """
     Get start of relevant date range from Google sheet as a list
     and convert to an integer. Subtract from today's date.
@@ -248,7 +248,7 @@ def main():
 
     while True:
         
-        trip = calculate_trip()
+        trip = get_user_trip()
         trip_list.append(trip)
         # use of .strip() at Brian Macharia's suggestion
         while True:
