@@ -1,11 +1,11 @@
 
 # Introduction to Residency-Checker  
 
-Schengen_Calculator is a python project. The goal for the website is to allow those third country nationals who have a visa waiver access to the Schengen zone to calculate their remaining days available for the zone. Users are prompted to enter the dates of their historical trips and are given a calculation of their days remaining. The programme calculates the historical 180 day period from which their allowance is evaluated, checks that dates entered are valid dates, occur after the 180 day period starts and are before the current date. Trip end dates are validated to ensure they occur after the trip start date. 
+Schengen_Calculator is a python project. The goal for the website is to allow those third country nationals who have a visa waiver access to the Schengen zone to calculate their remaining days available for the zone. Users are prompted to enter the dates of their historical trips and are given a calculation of their visa-waiver days remaining. The programme calculates the historical 180 day period from which their allowance is evaluated, checks that dates entered are valid dates, that is, that they occur after the 180 day period starts and are before the current date. Trip end dates are validated to ensure they occur after the trip start date. 
 
 The 90 eligible days in the rolling 180 day period (the structure of the Schenge visa waiver scheme) are retrieved from a Google spreadsheet. This allows for easy update should the scheme change. A log of calculated available days is sent to the Google spreadsheet so a typical remaining allowance can be seen.
 
-The Schengen_Calculator is designed to be provided by a company to its employees. Employees can check their remaining allowance in the programme, and Human Resources can review the typical remaining allowance of its employees from the Google spreadsheet. 
+The Schengen_Calculator is designed to be provided by a company to its employees. Employees can check their remaining allowance in the programme, and Human Resources can review the typical remaining (anonymised) allowance of its employees from the Google spreadsheet. 
 
 # Demo  
 
@@ -15,20 +15,13 @@ Several screenshots of the website can be found below illustrating the progressi
 
 
 ## Page on load
-This screenshot is what a user will see before they have entered any data...
+This screenshot is what a user will see before they have entered any data. Instructions for use are outlined, including notification that results will be send to a central database. The user is prompted to enter the date of their first trip.
 
-
-![Screenshot of website on page load](/docs/docs-images/screenshot-preuse.png "Website screenshot on page  load")
+![Screenshot of programme on page load](/docs/docimages/screenshot-onstart.png "Programme screenshot before user entry")
 ## Page on submit
-This screenshot is taken after a user has entered sample data...
+This screenshot is what a user sees after they complete their trips. They receive a message with the total days of their trips, their remaining visa-waiver allowance and confirmation that their results have been added to the central database.
 
-![Screenshot of website page](/docs/docs-images/screenshot.png "Website screenshot")
-
-## Page on 404 error  
-A screenshot of the page that loads when a non-existent URL is sought (the 404 error page) is found below. This page notifies the user of the error and provides a link to navigate back to the existing page. 
-
-![Screenshot of website page](/docs/docs-images/screenshot-404.png "Website screenshot 404 error page")
-
+![Screenshot of website page](/docs/docimages/screenshot-response.png "Screenshot of results message")
 
 
 # Technologies Used
