@@ -29,46 +29,56 @@ Python
 
 # UX
 ## User Stories
-As a third country national, I want to know how many days left in the Schengen based on the trips I have already taken.
+As a third country national and employee, I want to know how many days left in the Schengen based on the trips I have already taken.
 
-As a Human Resources manager, I want to know what the typical allowance remaining is of staff members so I can plan work accordingly.
+As a Human Resources manager, I want to know what the typical allowance remains of staff members so I can plan work accordingly.
 
 ## Strategy
-The strategic aim is to create a programme that is easy to use and gives an unambiguous answer. The programme is designed to be easy to use through the automatic prevention of common errors with the use of data validation. The answer is designed to be simple by limiting it to a single, numeric response and a binary conclusion as to whether availability remains or not.  Common errors include trip start dates that are before the relevant rolling 180 day period, end dates that are before the trip start date or after the current date. These errors are met with an error warning and prompt to re-enter the data. 
+The strategic aim is to create a programme that is easy to use and gives an unambiguous answer. The programme is designed to be easy to use through the automatic prevention of common errors with the use of data validation. The answer is designed to be simple by limiting it to a single, numeric response and a binary conclusion as to whether availability remains or not.  Common errors include trip start dates that are before the relevant rolling 180 day period, end dates that are before the trip start date or after the current date or invalid data entries. These errors are met with an error warning and prompt to re-enter the data. 
 
 ## Scope
 This version is designed as a minimum viable product (MVP) to assess availability based on historical trips in the Schengen. Later versions could include provision to include future trips for Schengen availability on a future date. Further, employee log-in could be added so that remaining availability (saved in Google spreadsheet) could be matched to an employee. Finally, the framework could be replicated for additional visa schemes in the rest of the world.  
 
 ## Structure
-??? 
+The programme is deployed to a web interface, via Heroku, for user web access. It offers a single-page rolling terminal interface without navigation options. The spreadsheet that collects results is not designed to be accessible to trip users and to be read-only for HR Managers.  
 
 ## Skeleton (insert wirefames)
 
-Insert lucid here <br>  
+A flowchart was created before programming started to plan the intended
+programme flow, as per the attached flowchart. The flowchart shows the progression through user input of trip start date and end date, the error handling and finally the message generated to tell the user of the result. <br>  
 
-![Screenshot of website page](/docs/docs-images/wireframe.png "Wireframe")<br>  
+![Screenshot of website page](/docs/docimages/flowchart.png "Flowchart of programme structure")<br>  
 
-
-
-## Surface
-??? 
 
 ## Features
 ### Features included in this current version
-Users can enter their trips, by start date and end date. They are able to enter as many additional historical trips as they wish, via a prompt to select 'Add another trip? Y/N'. When they select no they are given the calculation of their availability in text form. Human Resource Managers can review the Google spreadsheet to see typical availability and update the parameters of the visa waiver scheme should that change.
+Users can enter their trips, by start date and end date. They are able to enter as many additional historical trips as they wish, via a prompt to select 'Add another trip? Y/N'. When they select 'N' they are given the calculation of their availability in text form. Human Resource Managers can review the Google spreadsheet to see typical availability. There are user error handling features to prevent trip dates before the relevant rolling start date or after the current date, as well as end dates before start dates. Data quality features include cleaning user input of leading/trailing whitespace. The programme can tolerate a range of likely user responses deviating from the requested Y/N input when asking about additional trips. These accommodations include: y, Yes, YES, yes, n, No, NO, no. Dates are presented in DD/MM/YYYY format in anticipation of a predominately European audience.
 
-![Screenshot of website page](/docs/docs-images/dates.png "Website screenshot of dates")
+A screenshot illustrating the user experience when entering valid dates and being offered the opportunity to add additional trips (with a reminder of trips already entered) is attached here:
+![Screenshot of website page](/docs/docimages/screenshot-validuse.png "Website screenshot of valid dates")
 
-The user is presented with error warnings if they enter invalid data. 
-![Screenshot of website page](/docs/docs-images/errormessage.png "Website screenshot of error message")
+A screenshot illustrating the user experience of receiving a message calculating their trip length, their remaining availability and confirmation the data has been added to the central database is below. This screenshot also shows the programme tolerating user entry of 'no' rather than 'N' and illustrates the user experience of being reminded of multiple previous trips they have entered:
+![Screenshot of website page](/docs/docimages/screenshot-response.png "Website screenshot of user results")
 
 
+A screenshot is attached illustrating the error handling of invalid date entry ('cat' instead of a date in this instance). A user error message is generated and the user in invited to resubmit, with a prompt of valid input:
+![Screenshot of website page](/docs/docimages/screenshot-invaliddate.png "Website screenshot of invalid dates")
 
-![Screenshot of website page](/docs/docs-images/results.png "Website screenshot of results")
+A screenshot of the error handling when a user enters an invalid response to a prompt for additional trips is below. 
+![Screenshot of website page](/docs/docimages/screenshot-invalidyn.png "Website screenshot of invalid Y/N response")
+
+A screenshot of the error handling when a user enters a trip end date that is before their trip start date is here:
+![Screenshot of website page](/docs/docimages/screenshot-invalidend.png "Website screenshot of invalid end date")
+
+A screenshot of the error handling when a user enters a trip date that is after the current date (ie a future trip not an historical one) is here:
+![Screenshot of website page](/docs/docimages/screenshot-endfuture.png "Website screenshot of invalid future trip")
+
+Finally, a screenshot of the error handling when the user enters a date that is before the relevant rolling 180day start period:
+![Screenshot of website page](/docs/docimages/screenshot-prerolling.png "Website screenshot of date preceding rolling 180 days")
 
 
 ### Features planned for later versions
-Later versions will incorporate future trips, for a dynamic evaluation of planned trips. In addition, a user log-in feature is planned so that the availability sent to the Google spreadsheet can be matched to an employee for greater specificity.
+Later versions will incorporate future trips, for a dynamic evaluation of planned trips. In addition, a user log-in feature is planned so that the availability sent to the Google spreadsheet can be matched to an employee for greater specificity. Finally, additional data quality measures are planned, particularly a feature to prevent the user entry of overlapping trip dates. Mitigation for this potential data quality issue in the current version includes presentation to the user of trip dates they have already entered at the time of asking whether they want to add another trip. 
 
 # Deployment
 Google API was set up via: 
