@@ -227,7 +227,7 @@ def check_end_date_valid(start_date, end_date):
     if end_date > datetime.today():
         print(
             f' \n'
-            f"The start date of your trip ({start_date.strftime('%d/%m/%Y')}) "
+            f"The end date of your trip ({end_date.strftime('%d/%m/%Y')}) "
             f'is in the future.'
             f' The trip period must be historical.'
             )
