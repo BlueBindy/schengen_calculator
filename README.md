@@ -17,7 +17,7 @@ Several screenshots of the website can be found below illustrating the progressi
 ## Page on load
 This screenshot is what a user will see before they have entered any data. Instructions for use are outlined, including notification that results will be send to a central database. The user is prompted to enter the date of their first trip.
 
-![Screenshot of programme on page load](/docs/docimages/screenshot-onstart.png "Programme screenshot before user entry")
+![Screenshot of programme on page load](docs/docimages/screenshot-onstart.png) "Programme screenshot before user entry")
 ## Page on submit
 This screenshot is what a user sees after they complete their trips. They receive a message with the total days of their trips, their remaining visa-waiver allowance and confirmation that their results have been added to the central database.
 
