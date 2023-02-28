@@ -116,8 +116,6 @@ Which API are you using: Google Drive API
 What data will you be accessing: Application Data
 Are you planning to use this API with Compute Engine, Kubernetes Engine, App Engine, or Cloud Functions?: 'No, I'm not using them'
 
-Service account name is fionaschengen and the service account is:
-fionaschengen@schengencalculator-377909.iam.gserviceaccount.com
 
 From within Credentials on the menu, the service account was selected and then Keys was selected from the available menu. From here 'Add Key' -> 'Create New Key' with 'JSON' selected as key type. The file that was created and downloaded was saved into the directory as 'creds.json'. The client email account from wtihin this file was shared with the Google sheet that is linked to this programme.
 
@@ -128,7 +126,10 @@ Sensitive data in the cred.json file was withheld from being pushed to GitHub by
 Two dependencies, Google-auth (needed to authenticate access to the Google cloud account for the spreadsheet) and gspread (a library), were installed using 'pip3 install gspread google-auth' in the command line and then imported into directory file: 'run.py'
 
 
-Development was within a Github repository, based on the Code Institute template: https://github.com/Code-Institute-Org/python-essentials-template . Repository is: https://github.com/BlueBindy/schengen_calculator and was built using the Gitpod button on the template repository menu. 
+Development was within a Github repository, based on the Code Institute template: https://github.com/Code-Institute-Org/python-essentials-template . Repository is: https://github.com/BlueBindy/schengen_calculator and was built using the Gitpod button on the template repository menu. The deployed site is deployed from the master branch and will update automatically upon new commits to the master branch.
+
+To run locally, you can clone this repository directly into the editor of your choice by pasting `git clone https://github.com/BlueBindy/schengen_calculator.git` into your terminal. To cut ties with this GitHub repository, type `git remote rm origin` into the terminal.
+
 
 Deployment to Heroku
 Dependencies necessary for deployment to Heroku were adding by using 'pip3 freeze > requirements.txt' to terminal 
