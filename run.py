@@ -237,7 +237,7 @@ def calculate_days_left(trip_list):
 
 def main():
     """
-    Call obseved_period_start, append trip start and end dates as tuples in
+    Call observed_period_start, append trip start and end dates as tuples in
     trip_list. Asks users if they want to include additional trips and then
     calls function to calculate days used and days remaining and inform user.
     Days remaining appended to Google spreadsheet and user informed.
@@ -281,4 +281,5 @@ def main():
     )
 
 
-main()
+if __name__ == "__main__":
+    main()
