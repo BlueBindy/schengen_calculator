@@ -1,5 +1,5 @@
 
-# Introduction to Residency-Checker  
+# Introduction to Schengen_Calculator 
 
 Schengen_Calculator is a python project. The goal for the website is to allow those third country nationals who have a visa waiver access to the Schengen zone to calculate their remaining days available for the zone. Users are prompted to enter the dates of their historical trips and are given a calculation of their visa-waiver days remaining. The programme calculates the historical 180 day period from which their allowance is evaluated, checks that dates entered are valid dates, that is, that they occur after the 180 day period starts and are before the current date. Trip end dates are validated to ensure they occur after the trip start date. 
 
@@ -114,7 +114,7 @@ In the Deploy tab, GitHub was chosen and connected. Automatic deployment was sel
 The live app, hosted by Heroku, is available at: https://schengen-calculator.herokuapp.com/
 
 # Testing
-All tests peformed on 'bluebindy.github.io/residency-checker/' on Chrome, Safari and Firefox browsers on a 13-inch early 2015 Macbook Air using MacOS Monterey v12.6.2. The exception to this is the Lighthouse accesssibility test which was performed on Chrome only.
+All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Opera and Firefox browsers on a 13-inch early 2015 Macbook Air using MacOS Monterey v12.6.2. 
 ## 1. Functionality Testing
 ### Test label: Connectivity to Google spreadsheet
 | Test step | Outcome |
