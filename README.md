@@ -17,7 +17,7 @@ Several screenshots of the website can be found below illustrating the progressi
 ## Page on load
 This screenshot is what a user will see before they have entered any data. Instructions for use are outlined, including notification that results will be send to a central database. The user is prompted to enter the date of their first trip.
 
-![Screenshot of programme on page load](docs/docimages/screenshot-onstart.png) "Programme screenshot before user entry")
+![Screenshot of programme on page load](docs/docimages/screenshot-onstart.png "Programme screenshot before user entry")
 ## Page on submit
 This screenshot is what a user sees after they complete their trips. They receive a message with the total days of their trips, their remaining visa-waiver allowance and confirmation that their results have been added to the central database.
 
@@ -78,7 +78,7 @@ Finally, a screenshot of the error handling when the user enters a date that is 
 
 
 ### Features planned for later versions
-Later versions will incorporate future trips, for a dynamic evaluation of planned trips. In addition, a user log-in feature is planned so that the availability sent to the Google spreadsheet can be matched to an employee for greater specificity. Finally, additional data quality measures are planned, particularly a feature to prevent the user entry of overlapping trip dates. Mitigation for this potential data quality issue in the current version includes presentation to the user of trip dates they have already entered at the time of asking whether they want to add another trip. 
+Later versions will incorporate future trips, for a dynamic evaluation of planned trips. In addition, a user log-in feature is planned so that the availability sent to the Google spreadsheet can be matched to an employee for greater specificity. Additional data quality measures are planned, particularly a feature to prevent the user entry of overlapping trip dates. Mitigation for this potential data quality issue in the current version includes presentation to the user of trip dates they have already entered at the time of asking whether they want to add another trip. Future user experience improvements, such as programmatic handling of user created leading/trailing whitespace on trip dates (rather than the current approach of producing an error message in these instances) will be introduced to match this feature already available for user responses to additional trip prompts. 
 
 # Deployment
 Google API was set up via: 
@@ -116,68 +116,55 @@ The live app, hosted by Heroku, is available at: https://schengen-calculator.her
 # Testing
 All tests peformed on 'bluebindy.github.io/residency-checker/' on Chrome, Safari and Firefox browsers on a 13-inch early 2015 Macbook Air using MacOS Monterey v12.6.2. The exception to this is the Lighthouse accesssibility test which was performed on Chrome only.
 ## 1. Functionality Testing
-### Test label: Pushing data to Google spreadsheet
+### Test label: Connectivity to Google spreadsheet
 | Test step | Outcome |
 | --- | --- |
-| Test action | ... |
-| Expected outcome | ... |
+| Test action | Confirm data is flowing from sheet to programme and back |
+| Expected outcome | Data contained in 'restricted-period' and 'visa_allowance' sheets is available to variables in programe (via Googleauth credentials and gspread import), and appear in print statements when programme is run. User results of remaining visa-waiver allowance populate 'days_available' sheet after programme is run. |
 | Notes | ...  |
 | Test outcome | PASS |  
 
-
-### Test label: Retrieval of visa waiver framework 
+### Test label: Deployment to Heroku
 | Test step | Outcome |
 | --- | --- |
-| Test action | Confirm programme is retrieving Google spreadsheet data |
-| Expected outcome | Y...|
+| Test action | Manually confirm programme is accessible to users in a Chrome, FireFox and Opera web tab at `https://schengen-calculator.herokuapp.com/` |
+| Expected outcome | Programme is accessible, and perform as expected, in a web interface hosted by Heroku |
+| Notes | Programme accessible in Chrome, FireFox, Opera. Additional testing also confirmed programme worked in browsers Edge and DuckDuckGo. However, Safari does not allow user entries at programme prompt. StackOverflow (user Omar Hussein) suggests it is caused by Safari disallowing the structure of a domain pointing to a CNAME record that points to the app, and the fix is a A-RECORD rather than a cloaked CNAME. No changes have been made to the CNAME record as this is part of the template implementation used in this programme.  |
+| Test outcome | PASS with Safari exception noted | 
+
+### Test label: Calculation of days used, days available, current date, visa-waiver rolling period start
+| Test step | Outcome |
+| --- | --- |
+| Test action | Manually confirm programme accurately calculates and presents to the user: days used, days available, current date, visa-waiver rolling period start based on their input or programme run. |
+| Expected outcome | Current date and visa-waiver rolling period starts should be accurately presented to the user via message and text content. Days used and days available should be accurately presented to the user after they have submitted their trips. |
+| Notes | This version does not prevent a user entering overlapping trip dates. Current mitigation is a user warning and the presentation of user entered dates to the user when prompting for additional trips, but user errors can still occur. If overlapping trips are entered, the calculation of days used will be over-stated and days available understated. Subseqent versions will address this.|
+| Test outcome | PASS |  
+
+
+### Test label: Error messages for invalid dates
+| Test step | Outcome |
+| --- | --- |
+| Test action | Enter user data responses that inavlid, namely: a) precede the rolling waiver period b) are in the future and c) trip end date preceded trip start date |
+| Expected outcome | All invalid date responses should produce a message letting user know they have entered invalid data and prompt another attempt. |
+| Notes | None to add |
+| Test outcome | PASS |  
+
+### Test label: Error messages for invalid entries for trip dates
+| Test step | Outcome |
+| --- | --- |
+| Test action | Enter user data responses to trip prompts that a) are blank b) are not in dd/mm/yyyy format |
+| Expected outcome | Blank or invalid date format (including invalid dates such as 35/01/2022 and leading/trailing whitespace) should produce a message letting user know they have entered invalid data and prompt another attempt. |
 | Notes | None to add |
 | Test outcome | PASS |  
 
 
-### Test label: Calculation of eligibility
+### Test label: Error messages for invalid response to additional trip prompt
 | Test step | Outcome |
 | --- | --- |
-| Test action | ... |
-| Expected outcome | ...|
+| Test action | Enter user data responses to additional trip prompts that a) are blank b) are not Y/N format |
+| Expected outcome | Blank or invalid entries should produce an error message and a prompt for another attempt. Expected similar responses to requested format (including y, YES, Yes, yes, n, NO, No, no) are programmatically handled without user error message. Leading and trailing whitespace is also accommodated programmatically. |
 | Notes | None to add |
-| Test outcome | PASS |  
-
-
-### Test label: Error message for incomplete data 
-| Test step | Outcome |
-| --- | --- |
-| Test action |... |
-| Expected outcome | ...  |
-| Notes | None to add |
-| Test outcome | PASS |  
-
-
-### Test label: Error message for invalid data 
-| Test step | Outcome |
-| --- | --- |
-| Test action | Enter data ... |
-| Expected outcome | ... |
-| Notes | None to add |
-| Test outcome | PASS |  
-
-### Test label: Deployment 
-| Test step | Outcome |
-| --- | --- |
-| Test action | Enter data ... |
-| Expected outcome | ... |
-| Notes | None to add |
-| Test outcome | PASS |  
-
-### Test label: Eligibility message
-| Test step | Outcome |
-| --- | --- |
-| Test action | Enter valid data at the prompts and select 'N' when asked to add another trip. |
-| Expected outcome | On submit... |
-| Notes | None to add |
-| Test outcome | PASS |
-
-
-
+| Test outcome | PASS | 
 
 ### Test label: File organisation
 | Test step | Outcome |

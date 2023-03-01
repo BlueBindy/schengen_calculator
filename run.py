@@ -74,6 +74,9 @@ def observed_period_start():
         f'Your {total_converted} rolling period started on '
         f"{restricted_period_starts.strftime('%d/%m/%Y')}, \n so please enter "
         f"dates of trips between then and today's date. \n"
+        f'Ensure multiple trip dates do no overlap, as this will '
+        f'cause days used to be overstated and days available to be '
+        f'understated.'
     )
 
 
