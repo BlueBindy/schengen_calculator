@@ -170,19 +170,9 @@ All tests peformed on 'bluebindy.github.io/residency-checker/' on Chrome, Safari
 | Test step | Outcome |
 | --- | --- |
 | Test action | Manually review all files and directories |
-| Expected outcome | XXX |
-| Notes |  |
+| Expected outcome | Files deploy as expected, all images render. |
+| Notes | |
 | Test outcome | PASS |  
-
-
-
-### Test label: Code format standardisation
-| Test step | Outcome |
-| --- | --- |
-| Test action | Manually review all code, and all file and directory names.|
-| Expected outcome | XXXX |
-| Notes |  |
-| Test outcome | PASS  |  
 
 
 ## 4. Validator Testing
@@ -192,7 +182,9 @@ All tests peformed on 'bluebindy.github.io/residency-checker/' on Chrome, Safari
 | Test action | Perform a Linter validation test |
 | Expected outcome | Validation passed with zero flagged results (with discretion applied to code line length as appropriate.) |
 | Notes | XXXXXXX |
-| Test outcome | PASS |  
+| Test outcome | PASS (screenshot attached)|  
+
+![Screenshot of website page](/docs/docimages/screenshot-linterpass.png "Website screenshot of Linter pass")
 
 
 # Acknowledgements and Copyright

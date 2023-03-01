@@ -91,7 +91,7 @@ def get_user_trip():
     Validate for valid date, trip begins after trip starts and before
     today's date. Return start_date, end_date as datetime objects.
 
-    Args: 
+    Args:
         none
 
     Returns:
@@ -169,7 +169,8 @@ def check_start_date_current(start_date):
         start_date (datetime object); user-entered trip start date.
 
     Return:
-        True if start_date valid (after restricted_period_starts and before datetime.today())
+        True if start_date valid (after restricted_period_starts and
+        before datetime.today())
         False if start_date invalid
 
     """
@@ -279,7 +280,7 @@ def main():
 
     Args:
         None
-        
+
     Returns:
         Nothing
     """
