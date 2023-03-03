@@ -175,7 +175,7 @@ All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Op
 | Test outcome | PASS |  
 
 
-## 4. Validator Testing
+## 2. Validator Testing
 ### Code Institute Python Linter
 | Test step | Outcome |
 | --- | --- |
@@ -190,7 +190,7 @@ All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Op
 # Acknowledgements and Copyright
 SCOPE code and code to link the programme to the Google Sheet was taken from Code Institute Python Essentials Project Walthrough module
 
-DATEEIME module imported for handling and manipulation of dates (e.g. for transformation of user-entered date strings into datetime objects so mathematical operations could be performed.)
+DATETIME module imported for handling and manipulation of dates (e.g. for transformation of user-entered date strings into datetime objects so mathematical operations could be performed.)
 
 Gspread and GoogleAuth credentials imported to access and manipulate Google
 spreadsheets data.
