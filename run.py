@@ -77,7 +77,7 @@ def observed_period_start():
         f"{restricted_period_starts.strftime('%d/%m/%Y')}, \n so please enter "
         f"dates of trips between then and today's date. \n"
         f' Ensure multiple trip dates do no overlap, as this will '
-        f'cause days used to be overstated and days available to be '
+        f'cause days used \n to be overstated and days available to be '
         f'understated.'
     )
 
@@ -233,7 +233,7 @@ def check_end_date_valid(start_date, end_date):
     if end_date > datetime.today():
         print(
             f' \n'
-            f"The end date of your trip ({end_date.strftime('%d/%m/%Y')}) "
+            f" The end date of your trip ({end_date.strftime('%d/%m/%Y')}) "
             f'is in the future.'
             f' The trip period must be historical.'
             )
@@ -301,10 +301,10 @@ def main():
                 ]
             another_trip = input(
                 f' Your current trip dates are: {date_str}. '
-                f'Do you want to add another trip? Y/N :\n'
+                f'Do you want to \n add another trip? Y/N :\n'
             ).lower().strip()
             if another_trip not in ('y', 'yes', 'n', 'no'):
-                print('Input must be Y or N')
+                print(' Input must be Y or N')
             else:
                 break
         if another_trip in ('y', 'yes'):
