@@ -301,7 +301,7 @@ def main():
                 ]
             another_trip = input(
                 f' Your current trip dates are: {date_str}. '
-                f'Do you want to \n add another trip? Y/N :\n'
+                f'\n Do you want to add another trip? Y/N :\n'
             ).lower().strip()
             if another_trip not in ('y', 'yes', 'n', 'no'):
                 print(' Input must be Y or N')
