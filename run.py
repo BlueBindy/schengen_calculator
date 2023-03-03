@@ -89,13 +89,13 @@ def get_user_trip():
     begins after restricted_period_starts and before today's date.
     Get end date of trip from user, convert to datetime object.
     Validate for valid date, trip begins after trip starts and before
-    today's date. Return start_date, end_date as datetime objects.
+    today's date. Return `start_date`, `end_date` as datetime objects.
 
     Args:
         none
 
     Returns:
-        start_date, end_date (datetime objects) as a tuple
+        `start_date`, `end_date` (datetime objects) as a tuple
     """
     total_period = SHEET.worksheet('restricted_period').get_all_values()
     total_range = total_period[1]
@@ -163,15 +163,15 @@ def check_start_date_current(start_date):
     Get start of relevant date range from Google sheet as a list
     and convert to an integer. Subtract from today's date.
     Check user entered start dates are after
-    restricted_period_starts and before today's date.
+    `restricted_period_starts` and before today's date.
 
     Args:
-        start_date (datetime object); user-entered trip start date.
+        `start_date` (datetime object); user-entered trip start date.
 
     Return:
-        True if start_date valid (after restricted_period_starts and
-        before datetime.today())
-        False if start_date invalid
+        `True` if `start_date` valid (after `restricted_period_starts` and
+        before `datetime.today()` (today's date))
+        `False` if `start_date` invalid
 
     """
     # Use of operands on datetime objects suggested by Paolo Moretti,
@@ -212,11 +212,11 @@ def check_end_date_valid(start_date, end_date):
     trip start date and before today's date.
 
     Args:
-        start_date, end_date (datetime objects)
+        `start_date`, `end_date` (datetime objects)
 
     Returns:
-        True if end_date after start_date and before datetime.today()
-        False if not True
+        `True` if `end_date` after `start_date` and before `datetime.today()`
+        `False` if not True
     """
     if start_date > end_date:
         print(
@@ -247,9 +247,9 @@ def calculate_days_left(trip_list):
     to calculate remaining allowance.
 
     Args:
-        trip_list (list of tuples, of user-entered start date and end date)
+        `trip_list` (list of tuples, of user-entered start date and end date)
     Returns:
-        days_remaining (integer of visa_converted - total_days)
+        `days_remaining` (integer of `visa_converted` - `total_days`)
     """
     visa_period = SHEET.worksheet('visa_allowance').get_all_values()
     visa_range = visa_period[1]
@@ -273,8 +273,8 @@ def calculate_days_left(trip_list):
 
 def main():
     """
-    Call observed_period_start, append trip start and end dates as tuples in
-    trip_list. Asks users if they want to include additional trips and then
+    Call `observed_period_start()`, append trip start and end dates as tuples in
+    `trip_list`. Asks users if they want to include additional trips and then
     calls function to calculate days used and days remaining and inform user.
     Days remaining appended to Google spreadsheet and user informed.
 
