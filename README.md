@@ -19,7 +19,7 @@ This screenshot is what a user will see before they have entered any data. Instr
 
 ![Screenshot of programme on page load](docs/docimages/screenshot-onstart.png "Programme screenshot before user entry")
 ## Page on submit
-This screenshot is what a user sees after they complete their trips. They receive a message with the total days of their trips, their remaining visa-waiver allowance and confirmation that their results have been added to the central database.
+This screenshot is what a user sees after they finish entering their trips. They receive a message with the total days of their trips, their remaining visa-waiver allowance and confirmation that their results have been added to the central database.
 
 ![Screenshot of website page](/docs/docimages/screenshot-response.png "Screenshot of results message")
 
@@ -31,13 +31,13 @@ Python
 ## User Stories
 As a third country national and employee, I want to know how many days left in the Schengen based on the trips I have already taken.
 
-As a Human Resources manager, I want to know what the typical allowance remains of staff members so I can plan work accordingly.
+As a Human Resources manager, I want to know what the typical visa-waiver allowance remains of staff members so I can plan work accordingly.
 
 ## Strategy
 The strategic aim is to create a programme that is easy to use and gives an unambiguous answer. The programme is designed to be easy to use through the automatic prevention of common errors with the use of data validation. The answer is designed to be simple by limiting it to a single, numeric response and a binary conclusion as to whether availability remains or not.  Common errors include trip start dates that are before the relevant rolling 180 day period, end dates that are before the trip start date or after the current date or invalid data entries. These errors are met with an error warning and prompt to re-enter the data. 
 
 ## Scope
-This version is designed as a minimum viable product (MVP) to assess availability based on historical trips in the Schengen. Later versions could include provision to include future trips for Schengen availability on a future date. Further, employee log-in could be added so that remaining availability (saved in Google spreadsheet) could be matched to an employee. Finally, the framework could be replicated for additional visa schemes in the rest of the world. Subsequen versions will also have additional data quality safeguards. 
+This version is designed as a minimum viable product (MVP) to assess availability based on historical trips in the Schengen. Later versions could include provision to include future trips for Schengen availability on a future date. Further, employee log-in could be added so that remaining availability (saved in Google spreadsheet) could be matched to an employee. Finally, the framework could be replicated for additional visa schemes in the rest of the world. Subsequent versions will also have additional data quality safeguards. 
 
 ## Structure
 The programme is deployed to a web interface, via Heroku, for user web access. It offers a single-page rolling terminal interface without navigation options. The spreadsheet that collects results is not designed to be accessible to trip users and to be read-only for HR Managers.  
@@ -82,7 +82,7 @@ Later versions will incorporate future trips, for a dynamic evaluation of planne
 
 # Deployment
 Google API was set up via: 
-https://console.cloud.google.com/ A new project ('schengencalculator') was created. From here, navigate to 'API and Services' and then 'Library' from teh memu. Using the search bar to find the Google API, it was enabled and then credentials created. The following options were selected:
+https://console.cloud.google.com/ A new project ('schengencalculator') was created. From here, navigate to 'API and Services' and then 'Library' from the memu. Using the search bar to find the Google API, it was enabled and then credentials created. The following options were selected:
 Which API are you using: Google Drive API
 What data will you be accessing: Application Data
 Are you planning to use this API with Compute Engine, Kubernetes Engine, App Engine, or Cloud Functions?: 'No, I'm not using them'
@@ -94,7 +94,7 @@ Finally, from within the Library tab on the menu, Google Sheets API was searched
 
 Sensitive data in the cred.json file was withheld from being pushed to GitHub by listing in .gitignore
 
-Two dependencies, Google-auth (needed to authenticate access to the Google cloud account for the spreadsheet) and gspread (a library), were installed using 'pip3 install gspread google-auth' in the command line and then imported into directory file: 'run.py'
+Two dependencies, Google-auth (needed to authenticate access to the Google cloud account for the spreadsheet) and gspread (a library), were installed using 'pip3 install gspread google-auth' in the command line and then imported into directory file: 'run.py'. These dependencies were imported in order to access and manipulate a Google spreadsheet that provides the visa waiver framework and to receive the results of remaining allowances.
 
 
 Development was within a Github repository, based on the Code Institute template: https://github.com/Code-Institute-Org/python-essentials-template . Repository is: https://github.com/BlueBindy/schengen_calculator and was built using the Gitpod button on the template repository menu. The deployed site is deployed from the master branch and will update automatically upon new commits to the master branch.
@@ -114,7 +114,7 @@ In the Deploy tab, GitHub was chosen and connected. Automatic deployment was sel
 The live app, hosted by Heroku, is available at: https://schengen-calculator.herokuapp.com/
 
 # Testing
-All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Opera and Firefox browsers on a 13-inch early 2015 Macbook Air using MacOS Monterey v12.6.2. 
+All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Opera and Firefox browsers on a 13-inch early 2015 Macbook Air using MacOS Monterey v12.6.3. 
 ## 1. Functionality Testing
 ### Test label: Connectivity to Google spreadsheet
 | Test step | Outcome |
@@ -137,7 +137,7 @@ All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Op
 | --- | --- |
 | Test action | Manually confirm programme accurately calculates and presents to the user: days used, days available, current date, visa-waiver rolling period start based on their input or programme run. |
 | Expected outcome | Current date and visa-waiver rolling period starts should be accurately presented to the user via message and text content. Days used and days available should be accurately presented to the user after they have submitted their trips. |
-| Notes | This version does not prevent a user entering overlapping trip dates. Current mitigation is a user warning and the presentation of user entered dates to the user when prompting for additional trips, but user errors can still occur. If overlapping trips are entered, the calculation of days used will be over-stated and days available understated. Subseqent versions will address this.|
+| Notes | This version does not prevent a user entering overlapping trip dates. Current mitigation is a user warning in the introductory text and the presentation of user entered dates to the user when prompting for additional trips, but user errors can still occur. If overlapping trips are entered, the calculation of days used will be over-stated and days available understated. Subseqent versions will address this.|
 | Test outcome | PASS |  
 
 
@@ -153,7 +153,7 @@ All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Op
 | Test step | Outcome |
 | --- | --- |
 | Test action | Enter user data responses to trip prompts that a) are blank b) are not in dd/mm/yyyy format |
-| Expected outcome | Blank or invalid date format (including invalid dates such as 35/01/2022 and leading/trailing whitespace) should produce a message letting user know they have entered invalid data and prompt another attempt. |
+| Expected outcome | Blank or invalid date format (including invalid dates such as 35/01/2022 and leading/trailing whitespace) should produce a message letting user know they have entered invalid data and prompt another attempt. Later versions will accommodate leading/trailing whitespace. |
 | Notes | None to add |
 | Test outcome | PASS |  
 
@@ -189,6 +189,11 @@ All tests peformed on 'https://schengen-calculator.herokuapp.com/' on Chrome, Op
 
 # Acknowledgements and Copyright
 SCOPE code and code to link the programme to the Google Sheet was taken from Code Institute Python Essentials Project Walthrough module
+
+DATEEIME module imported for handling and manipulation of dates (e.g. for transformation of user-entered date strings into datetime objects so mathematical operations could be performed.)
+
+Gspread and GoogleAuth credentials imported to access and manipulate Google
+spreadsheets data.
 
 README structure derived from the Code Institute's example. The structure and The testing approach and structure is based on advice from Brian Macharia.  
 

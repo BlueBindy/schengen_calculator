@@ -1,10 +1,12 @@
 # Deployed terminal is 80 characters wide and 24 rows high
 # Input statements need \n (new line character) to deploy
 # while using this Github template
-# Import Google Sheet class from Google module
+# Import Google Sheet class from Google module to access
+# Google spreadsheet
 import gspread
 from google.oauth2.service_account import Credentials
 # Import the class datetime, from within datetime module
+# to manipulate dates
 from datetime import datetime, timedelta
 
 
@@ -28,7 +30,7 @@ def observed_period_start():
     Get period of visa waiver days and relevant date range from sheet,
     as a list. Convert to an integer and subtract from today's date using
     datetime and timedelta classes in datetimemodule.
-    Class datetime returns a datetime object, which allows operations.
+    Class datetime produces a datetime object, which allows operations.
     Standard datetime format (YYYY-MM-DDTHH:MM:SS. mmmmmm)
     converted to dd/mm/yyyy during print statement as
     .strftime() is a string (does not allow for operations.)
@@ -74,7 +76,7 @@ def observed_period_start():
         f'Your {total_converted} rolling period started on '
         f"{restricted_period_starts.strftime('%d/%m/%Y')}, \n so please enter "
         f"dates of trips between then and today's date. \n"
-        f'Ensure multiple trip dates do no overlap, as this will '
+        f' Ensure multiple trip dates do no overlap, as this will '
         f'cause days used to be overstated and days available to be '
         f'understated.'
     )
@@ -236,7 +238,6 @@ def check_end_date_valid(start_date, end_date):
             f' The trip period must be historical.'
             )
         return False
-
     return True
 
 
@@ -263,20 +264,19 @@ def calculate_days_left(trip_list):
 
     print(
         f' \n'
-        f' Your trip was {total_days} day/s long. \n'
+        f' Your trip/s totaled {total_days} day/s long. \n'
         f' As of today, you have {days_remaining} day/s left of your '
         f'visa waiver allowance.'
         )
-
     return days_remaining
 
 
 def main():
     """
-    Call `observed_period_start()`, append trip start and end dates as tuples in
-    `trip_list`. Asks users if they want to include additional trips and then
-    calls function to calculate days used and days remaining and inform user.
-    Days remaining appended to Google spreadsheet and user informed.
+    Call `observed_period_start()`, append trip start and end dates as tuples
+    in `trip_list`. Asks users if they want to include additional trips and
+    then calls function to calculate days used and days remaining and inform
+    user. Days remaining appended to Google spreadsheet and user informed.
 
     Args:
         None
@@ -300,7 +300,7 @@ def main():
                 for dt in trip_list
                 ]
             another_trip = input(
-                f'Your current trip dates are: {date_str}. '
+                f' Your current trip dates are: {date_str}. '
                 f'Do you want to add another trip? Y/N :\n'
             ).lower().strip()
             if another_trip not in ('y', 'yes', 'n', 'no'):
